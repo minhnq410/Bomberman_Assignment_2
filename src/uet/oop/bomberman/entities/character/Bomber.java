@@ -3,6 +3,7 @@ package uet.oop.bomberman.entities.character;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
@@ -109,28 +110,88 @@ public class Bomber extends Character {
 
     @Override
     protected void calculateMove() {
+    	double _speed = 1;
+    	if (_input.up)
+    	{
+	    	if (canMove(this._x, this._y - Game.TILES_SIZE))
+	    	{
+	    		move(0, _speed);
+	    		_moving = true;
+	    		
+	    	}
+    	}
+    	if (_input.down)
+    	{
+	    	if (canMove(this._x, this._y + Game.TILES_SIZE))
+	    	{
+	    		move(0, _speed);
+	    		_moving = true;
+	    	}
+    	}
+    	if (_input.left)
+    	{
+	    	if (canMove(this._x - Game.TILES_SIZE, this._y))
+	    	{
+	    		move(_speed, 0);
+	    		_moving = true;
+	    	}
+    	}
+    	if (_input.right)
+    	{
+	    	if (canMove(this._x + Game.TILES_SIZE, this._y))
+	    	{
+	    		move(_speed, 0);
+	    		_moving = true;
+	    	}
+    	}
         // TODO: xử lý nhận tín hiệu điều khiển hướng đi từ _input và gọi move() để thực hiện di chuyển
         // TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển
     }
 
     @Override
-    public boolean canMove(double x, double y) {
-        // TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
-        return false;
+    public boolean canMove(double x, double y) 
+    {
+    	if (x <= 0 || y - Game.TILES_SIZE <= 0 || _board.getEntityAt(x/Game.TILES_SIZE, (y - Game.TILES_SIZE)/Game.TILES_SIZE) instanceof LayeredEntity) 
+    		return false;
+    	
+    	return true;
     }
 
     @Override
     public void move(double xa, double ya) {
-        // TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và thực hiện thay đổi tọa độ _x, _y
+    	if (_input.up)
+    	{
+    		this._y -= ya;
+    		_direction = 0;
+    	}
+    	if (_input.right) 
+    	{
+    		this._x += xa;
+    		_direction = 1;
+    	}
+    	if (_input.down) 
+    	{
+    		this._y += ya;
+    		_direction = 2;
+    	}
+    	if (_input.left) 
+    	{
+    		this._x -= xa;
+    		_direction = 3;
+    	}
+    	System.out.println("x: " + this._x + " " + "y: " + this._y);
+    	// TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và thực hiện thay đổi tọa độ _x, _y
         // TODO: nhớ cập nhật giá trị _direction sau khi di chuyển
     }
 
     @Override
     public boolean collide(Entity e) {
-        // TODO: xử lý va chạm với Flame
+        if (this.getBounds().intersects(e.getBounds())) return true;
+    	else return false;
+    	// TODO: xử lý va chạm với Flame
         // TODO: xử lý va chạm với Enemy
 
-        return true;
+       
     }
 
     private void chooseSprite() {

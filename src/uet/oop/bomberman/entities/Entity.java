@@ -1,5 +1,8 @@
 package uet.oop.bomberman.entities;
 
+import java.awt.Rectangle;
+
+import uet.oop.bomberman.Game;
 import uet.oop.bomberman.graphics.IRender;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
@@ -46,6 +49,10 @@ public abstract class Entity implements IRender {
 	 * @return
 	 */
 	public abstract boolean collide(Entity e);
+	public Rectangle getBounds()
+	{
+		return new Rectangle((int) _x,(int)  _y, Game.TILES_SIZE, Game.TILES_SIZE);
+	}
 	
 	public double getX() {
 		return _x;

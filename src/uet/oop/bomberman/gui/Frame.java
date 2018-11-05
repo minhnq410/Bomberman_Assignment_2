@@ -34,7 +34,6 @@ public class Frame extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);	
-		
 		_game.start();
 	}
 	
