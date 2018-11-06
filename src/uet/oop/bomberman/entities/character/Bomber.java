@@ -9,6 +9,7 @@ import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.input.Keyboard;
+import uet.oop.bomberman.level.Coordinates;
 
 import java.util.Iterator;
 import java.util.List;
@@ -153,14 +154,15 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) 
     {
-    	if (x <= 0 || y - Game.TILES_SIZE <= 0 || _board.getEntityAt(x/Game.TILES_SIZE, (y - Game.TILES_SIZE)/Game.TILES_SIZE).collide(this) && !(_board.getEntityAt(x/Game.TILES_SIZE, (y - Game.TILES_SIZE)/Game.TILES_SIZE) instanceof Grass))
+    	if (x <= 0 || y - Game.TILES_SIZE <= 0 || _board.getEntityAt(Coordinates.pixelToTile(x), Coordinates.pixelToTile(y - Game.TILES_SIZE)).collide(this) && !(_board.getEntityAt(Coordinates.pixelToTile(x), Coordinates.pixelToTile(y - Game.TILES_SIZE)) instanceof Grass))
     		return false;
     	
     	else return true;
     }
 
     @Override
-    public void move(double xa, double ya) {
+    public void move(double xa, double ya) 
+    {
     	if (_input.up)
     	{
     		this._y -= ya;

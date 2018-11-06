@@ -4,6 +4,7 @@ import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.destroyable.DestroyableTile;
 import uet.oop.bomberman.graphics.Screen;
 
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 /**
@@ -59,7 +60,12 @@ public class LayeredEntity extends Entity {
 	@Override
 	public boolean collide(Entity e) {
 		Entity topMost = this.getTopEntity();
-		if (!(topMost instanceof Grass) && topMost.getBounds().intersects(e.getBounds())) return true;
+		if (!(topMost instanceof Grass))
+		{
+			Rectangle first = topMost.getBounds();
+			Rectangle second = e.getBounds();
+			return first.getMinX() <= second.getMaxX() && first.getMaxX() >= second.getMinX() && first.getMinY() <= second.getMaxY() && first.getMaxY() >= second.getMinY();
+		}
 		else return false;
 	}
 

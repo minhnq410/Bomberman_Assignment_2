@@ -2,12 +2,15 @@ package uet.oop.bomberman.entities;
 
 import java.awt.Rectangle;
 
+import javax.naming.TimeLimitExceededException;
+
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.IRender;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
+
 
 /**
  * Lớp đại diện cho tất cả thực thể trong game (Bomber, Enemy, Wall, Brick,...)
@@ -53,7 +56,7 @@ public abstract class Entity implements IRender {
 	public Rectangle getBounds()
 	{
 		if (this instanceof Bomber) return new Rectangle((int) _x,(int)  _y, Game.TILES_SIZE, Game.TILES_SIZE);
-		else return new Rectangle((int) _x*Game.TILES_SIZE,(int)  _y*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE);
+		else return new Rectangle(Coordinates.tileToPixel(_x), Coordinates.tileToPixel(_y + 1), Game.TILES_SIZE, Game.TILES_SIZE);
 	}
 	
 	public double getX() {
