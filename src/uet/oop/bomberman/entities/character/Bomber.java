@@ -5,6 +5,7 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.input.Keyboard;
@@ -120,7 +121,7 @@ public class Bomber extends Character {
 	    		
 	    	}
     	}
-    	if (_input.down)
+    	else if (_input.down)
     	{
 	    	if (canMove(this._x, this._y + Game.TILES_SIZE))
 	    	{
@@ -128,7 +129,7 @@ public class Bomber extends Character {
 	    		_moving = true;
 	    	}
     	}
-    	if (_input.left)
+    	else if (_input.left)
     	{
 	    	if (canMove(this._x - Game.TILES_SIZE, this._y))
 	    	{
@@ -136,7 +137,7 @@ public class Bomber extends Character {
 	    		_moving = true;
 	    	}
     	}
-    	if (_input.right)
+    	else if (_input.right)
     	{
 	    	if (canMove(this._x + Game.TILES_SIZE, this._y))
 	    	{
@@ -144,6 +145,7 @@ public class Bomber extends Character {
 	    		_moving = true;
 	    	}
     	}
+    	else _moving = false;
         // TODO: xử lý nhận tín hiệu điều khiển hướng đi từ _input và gọi move() để thực hiện di chuyển
         // TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển
     }
@@ -151,10 +153,10 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) 
     {
-    	if (x <= 0 || y - Game.TILES_SIZE <= 0 || _board.getEntityAt(x/Game.TILES_SIZE, (y - Game.TILES_SIZE)/Game.TILES_SIZE) instanceof LayeredEntity) 
+    	if (x <= 0 || y - Game.TILES_SIZE <= 0 || _board.getEntityAt(x/Game.TILES_SIZE, (y - Game.TILES_SIZE)/Game.TILES_SIZE).collide(this) && !(_board.getEntityAt(x/Game.TILES_SIZE, (y - Game.TILES_SIZE)/Game.TILES_SIZE) instanceof Grass))
     		return false;
     	
-    	return true;
+    	else return true;
     }
 
     @Override

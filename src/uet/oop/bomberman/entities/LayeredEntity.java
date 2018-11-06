@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities;
 
+import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.destroyable.DestroyableTile;
 import uet.oop.bomberman.graphics.Screen;
 
@@ -58,7 +59,7 @@ public class LayeredEntity extends Entity {
 	@Override
 	public boolean collide(Entity e) {
 		Entity topMost = this.getTopEntity();
-		if (topMost.getBounds().intersects(e.getBounds())) return true;
+		if (!(topMost instanceof Grass) && topMost.getBounds().intersects(e.getBounds())) return true;
 		else return false;
 	}
 
