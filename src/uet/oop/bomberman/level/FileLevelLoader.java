@@ -1,5 +1,13 @@
 package uet.oop.bomberman.level;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.LayeredEntity;
@@ -26,9 +34,43 @@ public class FileLevelLoader extends LevelLoader {
 	}
 	
 	@Override
-	public void loadLevel(int level) {
-		// TODO: đọc dữ liệu từ tệp cấu hình /levels/Level{level}.txt
-		// TODO: cập nhật các giá trị đọc được vào _width, _height, _level, _map
+	public void loadLevel(int level) throws LoadLevelException {
+            BufferedReader br = null;
+            try {
+                // TODO: đọc dữ liệu từ tệp cấu hình /levels/Level{level}.txt
+                // TODO: cập nhật các giá trị đọc được vào _width, _height, _level, _map
+                String s = FileLevelLoader.class.getClassLoader().getResource("").toString();
+                s = s.substring(5);
+                s = s.replace("/", "\\");
+                File LevelsFile = new File(s + "levels\\Level" + level + ".txt");
+                br = new BufferedReader(new FileReader(LevelsFile));
+                
+                String metaData = br.readLine();
+                String[] temp;
+                temp = metaData.split("\\s", 3);
+                
+                _level = Integer.parseInt(temp[0]);
+                _height = Integer.parseInt(temp[1]);
+                _width = Integer.parseInt(temp[2]);
+                
+                _map = new char[_height][_width];
+                for (int i = 0; i < _height; i++)
+                {
+                    String line = br.readLine();
+                    for(int j = 0; j < _width;j++)
+                    {
+                        _map[i][j] = line.charAt(j);
+                    }
+                }
+            } catch (IOException ex) {
+                throw new LoadLevelException();
+            } finally {
+                try {
+                    br.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(FileLevelLoader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 	}
 
 	@Override
