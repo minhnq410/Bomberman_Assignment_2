@@ -72,9 +72,11 @@ public class Bomber extends Character {
      */
     private void detectPlaceBomb() {
         
-    	if (_input.space && _timeBetweenPutBombs < -500 && Game.getBombRate() > 0)
+    	if (_input.space && _timeBetweenPutBombs < -50 && Game.getBombRate() > 0)
     	{
-    		this.placeBomb(this.getXTile(), this.getYTile() );
+    		this.placeBomb(this.getXTile(), this.getYTile());
+    		Game.addBombRate(-1);
+    		_timeBetweenPutBombs = 0;
     	}
     	// TODO: kiểm tra xem phím điều khiển đặt bom có được gõ và giá trị _timeBetweenPutBombs, Game.getBombRate() có thỏa mãn hay không
         // TODO:  Game.getBombRate() sẽ trả về số lượng bom có thể đặt liên tiếp tại thời điểm hiện tại
@@ -84,7 +86,8 @@ public class Bomber extends Character {
     }
 
     protected void placeBomb(int x, int y) {
-        // TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
+        _bombs.add(new Bomb(x, y, _board)) ;
+    	// TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
     }
 
     private void clearBombs() {
@@ -188,7 +191,6 @@ public class Bomber extends Character {
     		this._x -= xa;
     		_direction = 3;
     	}
-    	System.out.println("x: " + this._x + " " + "y: " + this._y);
     	// TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và thực hiện thay đổi tọa độ _x, _y
         // TODO: nhớ cập nhật giá trị _direction sau khi di chuyển
     }

@@ -42,9 +42,40 @@ public class Flame extends Entity {
 		/**
 		 * biến last dùng để đánh dấu cho segment cuối cùng
 		 */
-		boolean last;
 
 		// TODO: tạo các segment dưới đây
+		if (_direction == 0) // Up
+		{
+			for (int i = 0; i < _flameSegments.length; i++)
+			{
+				_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() - i - 1, _direction, false);
+				if (i == _flameSegments.length - 1)_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() - i - 1, _direction, true);
+			}
+		}
+		if (_direction == 1) // Right
+		{
+			for (int i = 0; i < _flameSegments.length; i++)
+			{
+				_flameSegments[i] = new FlameSegment((int) this.getX() + i + 1, (int) this.getY(), _direction, false);
+				if (i == _flameSegments.length - 1)_flameSegments[i] = new FlameSegment((int) this.getX() + i + 1, (int) this.getY(), _direction, true);
+			}
+		}
+		if (_direction == 2) // Down
+		{
+			for (int i = 0; i < _flameSegments.length; i++)
+			{
+				_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() + i + 1, _direction, false);
+				if (i == _flameSegments.length - 1)_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() + i + 1, _direction, true);
+			}
+		}
+		if (_direction == 3) // Left
+		{
+			for (int i = 0; i < _flameSegments.length; i++)
+			{
+				_flameSegments[i] = new FlameSegment((int) this.getX() - i - 1, (int) this.getY(), _direction, false);
+				if (i == _flameSegments.length - 1)_flameSegments[i] = new FlameSegment((int) this.getX() - i - 1, (int) this.getY(), _direction, true);
+			}
+		}
 	}
 
 	/**
@@ -52,8 +83,7 @@ public class Flame extends Entity {
 	 * @return
 	 */
 	private int calculatePermitedDistance() {
-		// TODO: thực hiện tính toán độ dài của Flame
-		return 1;
+		return _radius;
 	}
 	
 	public FlameSegment flameSegmentAt(int x, int y) {
