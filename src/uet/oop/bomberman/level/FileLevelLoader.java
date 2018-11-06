@@ -6,6 +6,7 @@ import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.entities.tile.item.SpeedItem;
 import uet.oop.bomberman.exceptions.LoadLevelException;
@@ -41,13 +42,13 @@ public class FileLevelLoader extends LevelLoader {
 		for (int x = 0; x < 20; x++) {
 			for (int y = 0; y < 20; y++) {
 				int pos = x + y * _width;
-				Sprite sprite = y == 0 || x == 0 || x == 10 || y == 10 ? Sprite.wall : Sprite.grass;
+				Sprite sprite = (y == 0 || x == 0 || x == 10 || y == 10) ? Sprite.wall : Sprite.grass;
 				_board.addEntity(pos, new Grass(x, y, sprite));
 			}
 		}
 
 		// thêm Bomber
-		int xBomber = 4, yBomber = 1;
+		int xBomber = 1, yBomber = 1;
 		_board.addCharacter( new Bomber(Coordinates.tileToPixel(xBomber), Coordinates.tileToPixel(yBomber) + Game.TILES_SIZE, _board) );
 		Screen.setOffset(0, 0);
 		_board.addEntity(xBomber + yBomber * _width, new Grass(xBomber, yBomber, Sprite.grass));
@@ -58,23 +59,30 @@ public class FileLevelLoader extends LevelLoader {
 		//_board.addEntity(xE + yE * _width, new Grass(xE, yE, Sprite.grass));
 
 		// thêm Brick
-		int xB = 3, yB = 1;
-		_board.addEntity(xB + yB * _width,
-				new LayeredEntity(xB, yB,
-					new Grass(xB, yB, Sprite.grass),
-					new Brick(xB, yB, Sprite.brick)
+		int xB1 = 1, yB1 = 2;
+		_board.addEntity(xB1 + yB1 * _width,
+				new LayeredEntity(xB1, yB1,
+					new Grass(xB1, yB1, Sprite.grass),
+					new Wall(xB1, yB1, Sprite.wall)
+				)
+		);
+		int xB2 = 4, yB2 = 1;
+		_board.addEntity(xB2 + yB2 * _width,
+				new LayeredEntity(xB2, yB2,
+					new Grass(xB2, yB2, Sprite.grass),
+					new Brick(xB2, yB2, Sprite.brick)
 				)
 		);
 
 		// thêm Item kèm Brick che phủ ở trên
-		int xI = 1, yI = 2;
-		_board.addEntity(xI + yI * _width,
-				new LayeredEntity(xI, yI,
-					new Grass(xI ,yI, Sprite.grass),
-					new SpeedItem(xI, yI, Sprite.powerup_flames),
-					new Brick(xI, yI, Sprite.brick)
-				)
-		);
+		//int xI = 4, yI = 1;
+		//_board.addEntity(xI + yI * _width,
+		//		new LayeredEntity(xI, yI,
+		//			new Grass(xI ,yI, Sprite.grass),
+		//			new SpeedItem(xI, yI, Sprite.powerup_flames),
+		//			new Brick(xI, yI, Sprite.brick)
+		//		)
+		//);
 	}
 
 }

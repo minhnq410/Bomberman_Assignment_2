@@ -64,7 +64,7 @@ public class LayeredEntity extends Entity {
 		{
 			Rectangle first = topMost.getBounds();
 			Rectangle second = e.getBounds();
-			return first.getMinX() <= second.getMaxX() && first.getMaxX() >= second.getMinX() && first.getMinY() <= second.getMaxY() && first.getMaxY() >= second.getMinY();
+			return first.intersects(second);
 		}
 		else return false;
 	}

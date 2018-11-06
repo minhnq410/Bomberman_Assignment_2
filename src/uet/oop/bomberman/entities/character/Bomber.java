@@ -71,7 +71,12 @@ public class Bomber extends Character {
      * Kiểm tra xem có đặt được bom hay không? nếu có thì đặt bom tại vị trí hiện tại của Bomber
      */
     private void detectPlaceBomb() {
-        // TODO: kiểm tra xem phím điều khiển đặt bom có được gõ và giá trị _timeBetweenPutBombs, Game.getBombRate() có thỏa mãn hay không
+        
+    	if (_input.space && _timeBetweenPutBombs < -500 && Game.getBombRate() > 0)
+    	{
+    		this.placeBomb(this.getXTile(), this.getYTile() );
+    	}
+    	// TODO: kiểm tra xem phím điều khiển đặt bom có được gõ và giá trị _timeBetweenPutBombs, Game.getBombRate() có thỏa mãn hay không
         // TODO:  Game.getBombRate() sẽ trả về số lượng bom có thể đặt liên tiếp tại thời điểm hiện tại
         // TODO: _timeBetweenPutBombs dùng để ngăn chặn Bomber đặt 2 Bomb cùng tại 1 vị trí trong 1 khoảng thời gian quá ngắn
         // TODO: nếu 3 điều kiện trên thỏa mãn thì thực hiện đặt bom bằng placeBomb()
@@ -154,7 +159,7 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) 
     {
-    	if (x <= 0 || y - Game.TILES_SIZE <= 0 || _board.getEntityAt(Coordinates.pixelToTile(x), Coordinates.pixelToTile(y - Game.TILES_SIZE)).collide(this) && !(_board.getEntityAt(Coordinates.pixelToTile(x), Coordinates.pixelToTile(y - Game.TILES_SIZE)) instanceof Grass))
+    	if (x <= 0 || y - Game.TILES_SIZE <= 0 || _board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)).collide(this) && !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)) instanceof Grass))
     		return false;
     	
     	else return true;
