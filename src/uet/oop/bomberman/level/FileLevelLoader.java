@@ -12,8 +12,9 @@ import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
-import uet.oop.bomberman.entities.character.enemy.Balloon;
+import uet.oop.bomberman.entities.character.enemy.*;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.Portal;
 import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.entities.tile.item.SpeedItem;
@@ -75,56 +76,79 @@ public class FileLevelLoader extends LevelLoader {
 
 	@Override
 	public void createEntities() {
-		// TODO: tạo các Entity của màn chơi
-		// TODO: sau khi tạo xong, gọi _board.addEntity() để thêm Entity vào game
+            // TODO: tạo các Entity của màn chơi
+            // TODO: sau khi tạo xong, gọi _board.addEntity() để thêm Entity vào game
 
-		// TODO: phần code mẫu ở dưới để hướng dẫn cách thêm các loại Entity vào game
-		// TODO: hãy xóa nó khi hoàn thành chức năng load màn chơi từ tệp cấu hình
-		// thêm Wall
-		for (int x = 0; x < 20; x++) {
-			for (int y = 0; y < 20; y++) {
-				int pos = x + y * _width;
-				Sprite sprite = (y == 0 || x == 0 || x == 10 || y == 10) ? Sprite.wall : Sprite.grass;
-				_board.addEntity(pos, new Grass(x, y, sprite));
-			}
-		}
-
-		// thêm Bomber
-		int xBomber = 1, yBomber = 1;
-		_board.addCharacter( new Bomber(Coordinates.tileToPixel(xBomber), Coordinates.tileToPixel(yBomber) + Game.TILES_SIZE, _board) );
-		Screen.setOffset(0, 0);
-		_board.addEntity(xBomber + yBomber * _width, new Grass(xBomber, yBomber, Sprite.grass));
-
-		// thêm Enemy
-		int xE = 2, yE = 1;
-		_board.addCharacter( new Balloon(Coordinates.tileToPixel(xE), Coordinates.tileToPixel(yE) + Game.TILES_SIZE, _board));
-		_board.addEntity(xE + yE * _width, new Grass(xE, yE, Sprite.grass));
-
-		// thêm Brick
-		int xB1 = 1, yB1 = 2;
-		_board.addEntity(xB1 + yB1 * _width,
-				new LayeredEntity(xB1, yB1,
-					new Grass(xB1, yB1, Sprite.grass),
-					new Wall(xB1, yB1, Sprite.wall)
-				)
-		);
-		int xB2 = 4, yB2 = 1;
-		_board.addEntity(xB2 + yB2 * _width,
-				new LayeredEntity(xB2, yB2,
-					new Grass(xB2, yB2, Sprite.grass),
-					new Brick(xB2, yB2, Sprite.brick)
-				)
-		);
-
-		// thêm Item kèm Brick che phủ ở trên
-		//int xI = 4, yI = 1;
-		//_board.addEntity(xI + yI * _width,
-		//		new LayeredEntity(xI, yI,
-		//			new Grass(xI ,yI, Sprite.grass),
-		//			new SpeedItem(xI, yI, Sprite.powerup_flames),
-		//			new Brick(xI, yI, Sprite.brick)
-		//		)
-		//);
+            // TODO: phần code mẫu ở dưới để hướng dẫn cách thêm các loại Entity vào game
+            // TODO: hãy xóa nó khi hoàn thành chức năng load màn chơi từ tệp cấu hình
+                
+                for (int y = 0; y < _height; y++)
+                {
+                    for (int x = 0; x < _width; x++)
+                    {
+                        switch (_map[y][x])
+                        {
+                            case '#': //Wall
+                            {
+                                int pos = x + y * _width;
+                                _board.addEntity(x + y * _width, new Wall(x, y, Sprite.wall));
+                                break;
+                            }
+                            case '*': //Brick
+                            {
+                                _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Brick(x, y, Sprite.brick)));
+                                break;
+                            }
+                            case 'x': //Portal
+                            {
+                                _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Portal(x, y, Sprite.portal)));
+                                break;
+                            }
+                            case 'p': //Bomber
+                            {
+                                _board.addCharacter( new Bomber(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board) );
+                                Screen.setOffset(0, 0);
+                                _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
+                                break;
+                            }
+                            case '1': //Balloon
+                            {
+                                _board.addCharacter( new Balloon(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                                _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
+                                break;
+                            }
+                            case '2': //Oneal
+                            {
+                                _board.addCharacter( new Oneal(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                                _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
+                                break;
+                            }
+                            case 'b': //Bomb item
+                            {
+                                _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass)
+                                                , new SpeedItem(x, y, Sprite.powerup_speed), new Brick(x, y, Sprite.brick)));
+                                break;
+                            }
+                            case 'f': //Flame item
+                            {
+                                _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass)
+                                                , new SpeedItem(x, y, Sprite.powerup_speed), new Brick(x, y, Sprite.brick)));
+                                break;
+                            }
+                            case 's': //Speed item
+                            {
+                                _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass)
+                                                , new SpeedItem(x, y, Sprite.powerup_speed), new Brick(x, y, Sprite.brick)));
+                                break;
+                            }
+                            default: //Grass
+                            {
+                                _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
+                            }
+                        }
+                    }
+                }
+                
 	}
 
 }
