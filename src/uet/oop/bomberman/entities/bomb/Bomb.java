@@ -82,19 +82,19 @@ public class Bomb extends AnimatedEntitiy {
 		int leftRadius = 0, rightRadius = 0, upRadius = 0, downRadius = 0;
 		for (int i = (int) this.getX() + 1; i <= (int) this.getX() + _baseRadius; i++)
 		{
-			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
+			if (!(_board.getEntityAt(i, this.getY()) instanceof Wall))
 				rightRadius++;
 			else break;
 		}
 		for (int i = (int) this.getX() - 1; i >= (int) this.getX() - _baseRadius; i--)
 		{
-			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
+			if (!(_board.getEntityAt(i, this.getY()) instanceof Wall))
 				leftRadius++;
 			else break;
 		}
 		for (int i = (int) this.getY() + 1; i <= (int) this.getY() + _baseRadius; i++)
 		{
-			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
+ 			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				downRadius++;
 			else break;
 		}
