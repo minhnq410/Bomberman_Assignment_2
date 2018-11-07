@@ -3,7 +3,10 @@ package uet.oop.bomberman.entities.bomb;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.LayeredEntity;
+import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
@@ -12,7 +15,7 @@ public class Bomb extends AnimatedEntitiy {
 
 	protected double _timeToExplode = 120; //2 seconds
 	public int _timeAfter = 20;
-	protected int _baseRadius = 3;
+	protected int _baseRadius = 1;
 	
 	protected Board _board;
 	protected Flame[] _flames;
@@ -79,27 +82,25 @@ public class Bomb extends AnimatedEntitiy {
 		int leftRadius = 0, rightRadius = 0, upRadius = 0, downRadius = 0;
 		for (int i = (int) this.getX() + 1; i <= (int) this.getX() + _baseRadius; i++)
 		{
-			if (_board.getEntityAt(i, this.getY()) instanceof Grass)
+			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				rightRadius++;
 			else break;
 		}
 		for (int i = (int) this.getX() - 1; i >= (int) this.getX() - _baseRadius; i--)
 		{
-			if (i == 0) break;
-			if (_board.getEntityAt(i, this.getY()) instanceof Grass)
+			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				leftRadius++;
 			else break;
 		}
 		for (int i = (int) this.getY() + 1; i <= (int) this.getY() + _baseRadius; i++)
 		{
-			if (_board.getEntityAt(this.getX(), i) instanceof Grass)
+			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				downRadius++;
 			else break;
 		}
 		for (int i = (int) this.getY() - 1; i >= (int) this.getY() - _baseRadius; i--)
 		{
-			if (i == 0) break;
-			if (_board.getEntityAt(this.getX(), i) instanceof Grass)
+			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				upRadius++;
 			else break;
 		}
@@ -129,7 +130,12 @@ public class Bomb extends AnimatedEntitiy {
 
 	@Override
 	public boolean collide(Entity e) {
-        // TODO: xử lý khi Bomber đi ra sau khi vừa đặt bom (_allowedToPassThru)
+        if (e instanceof Flame || e instanceof FlameSegment)
+        {
+        	this.explode();
+        	return true;
+        }
+		// TODO: xử lý khi Bomber đi ra sau khi vừa đặt bom (_allowedToPassThru)
         // TODO: xử lý va chạm với Flame của Bomb khác
         return false;
 	}

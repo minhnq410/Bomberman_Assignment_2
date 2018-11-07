@@ -16,7 +16,7 @@ import java.awt.image.DataBufferInt;
 public class Game extends Canvas {
 
 	public static final int TILES_SIZE = 16,
-							WIDTH = TILES_SIZE * (31 / 2),
+							WIDTH = TILES_SIZE * (31/2),
 							HEIGHT = 13 * TILES_SIZE;
 
 	public static int SCALE = 3;

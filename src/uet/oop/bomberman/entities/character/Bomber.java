@@ -5,7 +5,10 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.bomb.FlameSegment;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.input.Keyboard;
@@ -42,9 +45,11 @@ public class Bomber extends Character {
 
         if (_timeBetweenPutBombs < -7500) _timeBetweenPutBombs = 0;
         else _timeBetweenPutBombs--;
-
+        
+        this.collide(_board.getEntityAt(Coordinates.pixelToTile(this._x), Coordinates.pixelToTile(this._y)));
+        
         animate();
-
+        
         calculateMove();
 
         detectPlaceBomb();
@@ -86,7 +91,7 @@ public class Bomber extends Character {
     }
 
     protected void placeBomb(int x, int y) {
-        _bombs.add(new Bomb(x, y, _board)) ;
+        _bombs.add(new Bomb(x, y, _board));
     	// TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
     }
 
@@ -123,7 +128,7 @@ public class Bomber extends Character {
     	double _speed = 1;
     	if (_input.up)
     	{
-	    	if (canMove(this._x, this._y - Game.TILES_SIZE))
+	    	if (canMove(this._x, this._y - this.getSprite().SIZE/4))
 	    	{
 	    		move(0, _speed);
 	    		_moving = true;
@@ -132,7 +137,7 @@ public class Bomber extends Character {
     	}
     	else if (_input.down)
     	{
-	    	if (canMove(this._x, this._y + Game.TILES_SIZE))
+	    	if (canMove(this._x, this._y + this.getSprite().SIZE/4))
 	    	{
 	    		move(0, _speed);
 	    		_moving = true;
@@ -140,7 +145,7 @@ public class Bomber extends Character {
     	}
     	else if (_input.left)
     	{
-	    	if (canMove(this._x - Game.TILES_SIZE, this._y))
+	    	if (canMove(this._x - this.getSprite().SIZE/4, this._y))
 	    	{
 	    		move(_speed, 0);
 	    		_moving = true;
@@ -148,7 +153,7 @@ public class Bomber extends Character {
     	}
     	else if (_input.right)
     	{
-	    	if (canMove(this._x + Game.TILES_SIZE, this._y))
+	    	if (canMove(this._x + this.getSprite().SIZE/4, this._y))
 	    	{
 	    		move(_speed, 0);
 	    		_moving = true;
@@ -162,7 +167,7 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) 
     {
-    	if (x <= 0 || y - Game.TILES_SIZE <= 0 || _board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)).collide(this) && !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)) instanceof Grass))
+    	if (_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)).collide(this) && !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)) instanceof Grass))
     		return false;
     	
     	else return true;
@@ -197,8 +202,7 @@ public class Bomber extends Character {
 
     @Override
     public boolean collide(Entity e) {
-        if (this.getBounds().intersects(e.getBounds())) return true;
-    	else return false;
+    	return e.collide(this);
     	// TODO: xử lý va chạm với Flame
         // TODO: xử lý va chạm với Enemy
 

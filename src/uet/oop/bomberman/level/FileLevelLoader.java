@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.LayeredEntity;
+import uet.oop.bomberman.entities.bomb.FlameSegment;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.*;
 import uet.oop.bomberman.entities.tile.Grass;
@@ -90,7 +91,6 @@ public class FileLevelLoader extends LevelLoader {
                         {
                             case '#': //Wall
                             {
-                                int pos = x + y * _width;
                                 _board.addEntity(x + y * _width, new Wall(x, y, Sprite.wall));
                                 break;
                             }
@@ -148,7 +148,6 @@ public class FileLevelLoader extends LevelLoader {
                         }
                     }
                 }
-                
 	}
 
 }

@@ -53,6 +53,16 @@ public class LayeredEntity extends Entity {
 		}
 	}
 	
+	public int getLayeredSize()
+	{
+		return _entities.size();
+	}
+	
+	public void addToTop(Entity e)
+	{
+		_entities.add(e);
+	}
+	
 	public void addBeforeTop(Entity e) {
 		_entities.add(_entities.size() - 1, e);
 	}
@@ -62,9 +72,7 @@ public class LayeredEntity extends Entity {
 		Entity topMost = this.getTopEntity();
 		if (!(topMost instanceof Grass))
 		{
-			Rectangle first = topMost.getBounds();
-			Rectangle second = e.getBounds();
-			return first.intersects(second);
+			return topMost.collide(e);
 		}
 		else return false;
 	}
