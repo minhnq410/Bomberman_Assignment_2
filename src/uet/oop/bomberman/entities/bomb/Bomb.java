@@ -1,6 +1,7 @@
 package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
+import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
@@ -37,13 +38,16 @@ public class Bomb extends AnimatedEntitiy {
 			if(!_exploded) 
 				explode();
 			else
+			{
 				updateFlames();
+			}
 			
 			if(_timeAfter > 0) 
 				_timeAfter--;
 			else
 				remove();
 		}
+		this.collide(_board.getEntityAt(this._x, this._y));
 			
 		animate();
 	}

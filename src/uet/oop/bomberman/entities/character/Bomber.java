@@ -77,7 +77,7 @@ public class Bomber extends Character {
      */
     private void detectPlaceBomb() {
         
-    	if (_input.space && _timeBetweenPutBombs < -50 && Game.getBombRate() > 0)
+    	if (_input.space && _timeBetweenPutBombs < -25 && Game.getBombRate() > 0)
     	{
     		this.placeBomb(this.getXTile(), this.getYTile());
     		Game.addBombRate(-1);

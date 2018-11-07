@@ -53,6 +53,7 @@ public abstract class Enemy extends Character {
 		
 		if(_alive)
 			calculateMove();
+		this.collide(_board.getEntityAt(Coordinates.pixelToTile(this._x), Coordinates.pixelToTile(this._y - Game.TILES_SIZE)));
 	}
 	
 	@Override
@@ -97,9 +98,7 @@ public abstract class Enemy extends Character {
 
 	@Override
 	public boolean collide(Entity e) {
-		// TODO: xử lý va chạm với Flame
-		// TODO: xử lý va chạm với Bomber
-		return true;
+		return e.collide(this);
 	}
 	
 	@Override
