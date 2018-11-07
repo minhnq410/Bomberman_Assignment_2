@@ -128,7 +128,7 @@ public class Bomber extends Character {
     	double _speed = 1;
     	if (_input.up)
     	{
-	    	if (canMove(this._x, this._y - this.getSprite().SIZE/4))
+	    	if (canMove(this._x + this.getSprite().SIZE/4, this._y - this.getSprite().SIZE/4) && canMove(this._x, this._y - this.getSprite().SIZE/4))
 	    	{
 	    		move(0, _speed);
 	    		_moving = true;
@@ -137,7 +137,7 @@ public class Bomber extends Character {
     	}
     	else if (_input.down)
     	{
-	    	if (canMove(this._x, this._y + this.getSprite().SIZE/4))
+	    	if (canMove(this._x + this.getSprite().SIZE/4, this._y + this.getSprite().SIZE*3/4) && canMove(this._x, this._y + this.getSprite().SIZE*3/4))
 	    	{
 	    		move(0, _speed);
 	    		_moving = true;
@@ -145,7 +145,7 @@ public class Bomber extends Character {
     	}
     	else if (_input.left)
     	{
-	    	if (canMove(this._x - this.getSprite().SIZE/4, this._y))
+	    	if (canMove(this._x - this.getSprite().SIZE/4 - 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x - this.getSprite().SIZE/4 - 1, this._y))
 	    	{
 	    		move(_speed, 0);
 	    		_moving = true;
@@ -153,7 +153,7 @@ public class Bomber extends Character {
     	}
     	else if (_input.right)
     	{
-	    	if (canMove(this._x + this.getSprite().SIZE/4, this._y))
+	    	if (canMove(this._x + this.getSprite().SIZE/4 + 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x + this.getSprite().SIZE/4 + 1, this._y))
 	    	{
 	    		move(_speed, 0);
 	    		_moving = true;
