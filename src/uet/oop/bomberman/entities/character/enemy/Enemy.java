@@ -76,9 +76,10 @@ public abstract class Enemy extends Character {
 	@Override
 	public void calculateMove() {
 		// TODO: Tính toán hướng đi và di chuyển Enemy theo _ai và cập nhật giá trị cho _direction
+                //       hướng đi xuống/phải/trái/lên tương ứng với các giá trị 0/1/2/3
 		// TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không
 		// TODO: sử dụng move() để di chuyển
-		// TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển
+		// TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển                
 	}
 	
 	@Override
