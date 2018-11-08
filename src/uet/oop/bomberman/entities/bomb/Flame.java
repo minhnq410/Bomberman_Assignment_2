@@ -63,7 +63,7 @@ public class Flame extends Entity {
 						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * 31), new LayeredEntity((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY(), new Grass((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY(), Sprite.grass), _flameSegments[i]));
+					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()), _flameSegments[i]);
 				}
 				else 
 				{
@@ -74,7 +74,7 @@ public class Flame extends Entity {
 						tmp.addToTop(_flameSegments[i]);
 					}
 					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * 31), new LayeredEntity((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY(), new Grass((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY(), Sprite.grass), _flameSegments[i]));
+					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
 				}
 				
 			}
@@ -93,7 +93,7 @@ public class Flame extends Entity {
 						tmp.addToTop(_flameSegments[i]);
 					}
 					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * 31), _flameSegments[i]);
+					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
 				}
 				else
 				{
@@ -104,7 +104,7 @@ public class Flame extends Entity {
 						tmp.addToTop(_flameSegments[i]);
 					}
 					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * 31), _flameSegments[i]);
+					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()), _flameSegments[i]);
 				}
 				
 			}
@@ -123,7 +123,7 @@ public class Flame extends Entity {
 						tmp.addToTop(_flameSegments[i]);
 					}
 					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * 31), _flameSegments[i]);
+					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
 				}
 				else
 				{
@@ -134,7 +134,7 @@ public class Flame extends Entity {
 						tmp.addToTop(_flameSegments[i]);
 					}
 					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * 31), _flameSegments[i]);
+					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
 				}
 				
 			}
@@ -151,7 +151,7 @@ public class Flame extends Entity {
 						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * 31), _flameSegments[i]);
+					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
 				}
 				else
 				{
@@ -161,7 +161,7 @@ public class Flame extends Entity {
 						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * 31), _flameSegments[i]);
+					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
 				}
 		
 			}
@@ -188,7 +188,8 @@ public class Flame extends Entity {
 	@Override
 	public void update() 
 	{
-			for (int i = 0; i < _board._entities.length; i++)
+		if (this.getBounds().intersects(_board.getBomber().getBounds())) this.collide(_board.getBomber());
+		for (int i = 0; i < _board._entities.length; i++)
 			{
 				if (_board._entities[i] instanceof LayeredEntity) 
 				{

@@ -46,7 +46,7 @@ public class Bomber extends Character {
         if (_timeBetweenPutBombs < -7500) _timeBetweenPutBombs = 0;
         else _timeBetweenPutBombs--;
         
-        this.collide(_board.getEntityAt(Coordinates.pixelToTile(this._x), Coordinates.pixelToTile(this._y)));
+        this.collide(_board.getEntityAt(Coordinates.pixelToTile(this._x), Coordinates.pixelToTile(this._y - this.getSprite().SIZE*3/4)));
         
         animate();
         
@@ -91,7 +91,7 @@ public class Bomber extends Character {
     }
 
     protected void placeBomb(int x, int y) {
-        _bombs.add(new Bomb(x, y, _board));
+       _bombs.add(new Bomb(x, y, _board));
     	// TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
     }
 
@@ -203,6 +203,8 @@ public class Bomber extends Character {
     @Override
     public boolean collide(Entity e) {
     	return e.collide(this);
+    	
+    	
     	// TODO: xử lý va chạm với Flame
         // TODO: xử lý va chạm với Enemy
 

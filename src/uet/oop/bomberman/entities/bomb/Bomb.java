@@ -48,6 +48,7 @@ public class Bomb extends AnimatedEntitiy {
 				remove();
 		}
 		this.collide(_board.getEntityAt(this._x, this._y));
+		
 			
 		animate();
 	}
@@ -134,13 +135,12 @@ public class Bomb extends AnimatedEntitiy {
 
 	@Override
 	public boolean collide(Entity e) {
-        if (e instanceof Flame || e instanceof FlameSegment)
+        if (e instanceof FlameSegment)
         {
         	this.explode();
         	return true;
         }
-		// TODO: xử lý khi Bomber đi ra sau khi vừa đặt bom (_allowedToPassThru)
-        // TODO: xử lý va chạm với Flame của Bomb khác
+		
         return false;
 	}
 }
