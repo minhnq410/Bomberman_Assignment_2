@@ -6,6 +6,7 @@ import javax.naming.TimeLimitExceededException;
 
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.character.Bomber;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.graphics.IRender;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
@@ -55,7 +56,7 @@ public abstract class Entity implements IRender {
 	public abstract boolean collide(Entity e);
 	public Rectangle getBounds()
 	{
-		if (this instanceof Bomber) return new Rectangle((int) _x,(int)  _y, Game.TILES_SIZE, Game.TILES_SIZE);
+		if (this instanceof Bomber || this instanceof Enemy) return new Rectangle((int) _x,(int)  _y, Game.TILES_SIZE, Game.TILES_SIZE);
 		else return new Rectangle(Coordinates.tileToPixel(_x), Coordinates.tileToPixel(_y + 1), Game.TILES_SIZE, Game.TILES_SIZE);
 	}
 	

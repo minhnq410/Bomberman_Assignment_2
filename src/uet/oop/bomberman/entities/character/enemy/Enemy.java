@@ -98,6 +98,13 @@ public abstract class Enemy extends Character {
 
 	@Override
 	public boolean collide(Entity e) {
+		for (int i = 0; i < _board._characters.size(); i++)
+		{
+			if (_board._characters.get(i) instanceof Bomber && _board._characters.get(i).getBounds().intersects(this.getBounds()))
+			{
+				_board._characters.get(i).kill();
+			}
+		}
 		return e.collide(this);
 	}
 	
