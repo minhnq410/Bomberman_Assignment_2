@@ -4,6 +4,7 @@ import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.Portal;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.entities.tile.item.Item;
 import uet.oop.bomberman.graphics.Screen;
@@ -201,7 +202,7 @@ public class Flame extends Entity {
 					LayeredEntity tmp = (LayeredEntity) _board._entities[i];
 					if (tmp.getTopEntity() instanceof FlameSegment)
 					{
-						while (!(tmp.getTopEntity() instanceof Grass) && !(tmp.getTopEntity() instanceof Item))
+						while (!(tmp.getTopEntity() instanceof Grass) && !(tmp.getTopEntity() instanceof Item) && !(tmp.getTopEntity() instanceof Portal))
 						{
 							tmp.getTopEntity().remove();
 							tmp.update();
