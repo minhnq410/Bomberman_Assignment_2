@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities;
 
+import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.destroyable.DestroyableTile;
 import uet.oop.bomberman.graphics.Screen;
@@ -47,7 +48,9 @@ public class LayeredEntity extends Entity {
 	
 	public Entity getBelowTopEntity()
 	{
-		return _entities.get(this.getLayeredSize() - 2);
+		if (this.getLayeredSize() >= 2)
+			return _entities.get(this.getLayeredSize() - 2);
+		return null;
 	}
 	
 	private void clearRemoved() {

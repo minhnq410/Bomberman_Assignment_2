@@ -207,6 +207,10 @@ public class Flame extends Entity {
 							tmp.update();
 						}
 					}
+					else if (tmp.getTopEntity() instanceof Grass)
+					{
+						_board.addEntity(i, new Grass((int) _board._entities[i].getX(),(int) _board._entities[i].getY(), Sprite.grass));
+					}
 				}
 				else if (_board._entities[i] instanceof FlameSegment)
 				{
