@@ -189,6 +189,11 @@ public class Flame extends Entity {
 	public void update() 
 	{
 		if (this.getBounds().intersects(_board.getBomber().getBounds())) this.collide(_board.getBomber());
+		for (int i = 0; i < _flameSegments.length; i++)
+		{
+			if (_board.getBombAt(_flameSegments[i].getX(), _flameSegments[i].getY()) != null)
+				_board.getBombAt(_flameSegments[i].getX(), _flameSegments[i].getY()).collide(this);
+		}
 		for (int i = 0; i < _board._entities.length; i++)
 			{
 				if (_board._entities[i] instanceof LayeredEntity) 

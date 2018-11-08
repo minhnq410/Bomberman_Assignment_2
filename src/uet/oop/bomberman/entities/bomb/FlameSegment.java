@@ -1,5 +1,7 @@
 package uet.oop.bomberman.entities.bomb;
 
+import uet.oop.bomberman.Board;
+import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.graphics.Screen;
@@ -9,7 +11,6 @@ import uet.oop.bomberman.graphics.Sprite;
 public class FlameSegment extends Entity {
 
 	protected boolean _last;
-
 	/**
 	 *
 	 * @param x
@@ -22,6 +23,7 @@ public class FlameSegment extends Entity {
 		_x = x;
 		_y = y;
 		_last = last;
+		
 
 		switch (direction) {
 			case 0:

@@ -53,6 +53,7 @@ public class Bomber extends Character {
         calculateMove();
 
         detectPlaceBomb();
+        updateBombCollision();
     }
 
     @Override
@@ -77,7 +78,7 @@ public class Bomber extends Character {
      */
     private void detectPlaceBomb() {
         
-    	if (_input.space && _timeBetweenPutBombs < -25 && Game.getBombRate() > 0)
+    	if (_input.space && _timeBetweenPutBombs < -50 && Game.getBombRate() > 0)
     	{
     		this.placeBomb(this.getXTile(), this.getYTile());
     		Game.addBombRate(-1);
@@ -90,7 +91,8 @@ public class Bomber extends Character {
         // TODO: sau khi đặt, nhớ giảm số lượng Bomb Rate và reset _timeBetweenPutBombs về 0
     }
 
-    protected void placeBomb(int x, int y) {
+    protected void placeBomb(int x, int y) 
+    {
        _bombs.add(new Bomb(x, y, _board));
     	// TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
     }
@@ -104,6 +106,7 @@ public class Bomber extends Character {
             if (b.isRemoved()) {
                 bs.remove();
                 Game.addBombRate(1);
+                _board.addEntity((int) (b.getX() + b.getY() * _board.getLevel().getWidth()), new Grass((int) b.getX(),(int) b.getY(), Sprite.grass)); 
             }
         }
 
@@ -202,6 +205,7 @@ public class Bomber extends Character {
 
     @Override
     public boolean collide(Entity e) {
+    	
     	return e.collide(this);
     	
     	
@@ -244,5 +248,14 @@ public class Bomber extends Character {
                 }
                 break;
         }
+    }
+    
+    public void updateBombCollision() 
+    {
+    	for (int i = 0; i < _bombs.size(); i++)
+    	{
+    		if (_timeBetweenPutBombs < -25)
+    			_bombs.get(i)._allowedToPassThru = false;
+    	}
     }
 }

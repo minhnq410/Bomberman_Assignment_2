@@ -21,13 +21,14 @@ public class Bomb extends AnimatedEntitiy {
 	protected Board _board;
 	protected Flame[] _flames;
 	protected boolean _exploded = false;
-	protected boolean _allowedToPassThru = true;
+	public boolean _allowedToPassThru = true;
 	
 	public Bomb(int x, int y, Board board) {
 		_x = x;
 		_y = y;
 		_board = board;
 		_sprite = Sprite.bomb;
+		_board.addEntity(x + y *_board.getLevel().getWidth(), new LayeredEntity(x, y, this, new Grass(x, y, Sprite.grass)));
 	}
 	
 	@Override
@@ -135,12 +136,12 @@ public class Bomb extends AnimatedEntitiy {
 
 	@Override
 	public boolean collide(Entity e) {
-        if (e instanceof FlameSegment)
+        if (e instanceof FlameSegment || e instanceof Flame)
         {
         	this.explode();
         	return true;
         }
-		
+        else if (!this._allowedToPassThru) return true;
         return false;
 	}
 }

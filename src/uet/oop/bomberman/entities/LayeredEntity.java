@@ -45,6 +45,11 @@ public class LayeredEntity extends Entity {
 		return _entities.getLast();
 	}
 	
+	public Entity getBelowTopEntity()
+	{
+		return _entities.get(this.getLayeredSize() - 2);
+	}
+	
 	private void clearRemoved() {
 		Entity top = getTopEntity();
 		
@@ -73,6 +78,10 @@ public class LayeredEntity extends Entity {
 		if (!(topMost instanceof Grass))
 		{
 			return topMost.collide(e);
+		}
+		else if (topMost instanceof Grass)
+		{
+			return this.getBelowTopEntity().collide(e);
 		}
 		else return false;
 	}
