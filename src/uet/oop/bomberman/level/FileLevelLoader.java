@@ -18,6 +18,8 @@ import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Portal;
 import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
+import uet.oop.bomberman.entities.tile.item.BombItem;
+import uet.oop.bomberman.entities.tile.item.FlameItem;
 import uet.oop.bomberman.entities.tile.item.SpeedItem;
 import uet.oop.bomberman.exceptions.LoadLevelException;
 import uet.oop.bomberman.graphics.Screen;
@@ -101,7 +103,7 @@ public class FileLevelLoader extends LevelLoader {
                             }
                             case 'x': //Portal
                             {
-                                _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Portal(x, y, Sprite.portal)));
+                                _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Portal(x, y, Sprite.portal), new Brick(x, y, Sprite.brick)));
                                 break;
                             }
                             case 'p': //Bomber
@@ -126,19 +128,19 @@ public class FileLevelLoader extends LevelLoader {
                             case 'b': //Bomb item
                             {
                                 _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass)
-                                                , new SpeedItem(x, y, Sprite.powerup_speed), new Brick(x, y, Sprite.brick)));
+                                                , new BombItem(x, y, Sprite.powerup_bombs, _board), new Brick(x, y, Sprite.brick)));
                                 break;
                             }
                             case 'f': //Flame item
                             {
                                 _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass)
-                                                , new SpeedItem(x, y, Sprite.powerup_speed), new Brick(x, y, Sprite.brick)));
+                                                , new FlameItem(x, y, Sprite.powerup_flames, _board), new Brick(x, y, Sprite.brick)));
                                 break;
                             }
                             case 's': //Speed item
                             {
                                 _board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass)
-                                                , new SpeedItem(x, y, Sprite.powerup_speed), new Brick(x, y, Sprite.brick)));
+                                                , new SpeedItem(x, y, Sprite.powerup_speed, _board), new Brick(x, y, Sprite.brick)));
                                 break;
                             }
                             default: //Grass

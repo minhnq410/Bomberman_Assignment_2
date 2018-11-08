@@ -128,12 +128,11 @@ public class Bomber extends Character {
 
     @Override
     protected void calculateMove() {
-    	double _speed = 1;
     	if (_input.up)
     	{
 	    	if (canMove(this._x + this.getSprite().SIZE/4, this._y - this.getSprite().SIZE/4) && canMove(this._x, this._y - this.getSprite().SIZE/4))
 	    	{
-	    		move(0, _speed);
+	    		move(0, Game.getBomberSpeed());
 	    		_moving = true;
 	    		
 	    	}
@@ -142,7 +141,7 @@ public class Bomber extends Character {
     	{
 	    	if (canMove(this._x + this.getSprite().SIZE/4, this._y + this.getSprite().SIZE*3/4) && canMove(this._x, this._y + this.getSprite().SIZE*3/4))
 	    	{
-	    		move(0, _speed);
+	    		move(0, Game.getBomberSpeed());
 	    		_moving = true;
 	    	}
     	}
@@ -150,7 +149,7 @@ public class Bomber extends Character {
     	{
 	    	if (canMove(this._x - this.getSprite().SIZE/4 - 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x - this.getSprite().SIZE/4 - 1, this._y))
 	    	{
-	    		move(_speed, 0);
+	    		move(Game.getBomberSpeed(), 0);
 	    		_moving = true;
 	    	}
     	}
@@ -158,7 +157,7 @@ public class Bomber extends Character {
     	{
 	    	if (canMove(this._x + this.getSprite().SIZE/4 + 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x + this.getSprite().SIZE/4 + 1, this._y))
 	    	{
-	    		move(_speed, 0);
+	    		move(Game.getBomberSpeed(), 0);
 	    		_moving = true;
 	    	}
     	}

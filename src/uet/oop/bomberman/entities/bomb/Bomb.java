@@ -16,7 +16,7 @@ public class Bomb extends AnimatedEntitiy {
 
 	protected double _timeToExplode = 120; //2 seconds
 	public int _timeAfter = 20;
-	protected int _baseRadius = 1;
+	
 	
 	protected Board _board;
 	protected Flame[] _flames;
@@ -86,25 +86,25 @@ public class Bomb extends AnimatedEntitiy {
 	protected void explode() {
 		_exploded = true;
 		int leftRadius = 0, rightRadius = 0, upRadius = 0, downRadius = 0;
-		for (int i = (int) this.getX() + 1; i <= (int) this.getX() + _baseRadius; i++)
+		for (int i = (int) this.getX() + 1; i <= (int) this.getX() + Game.getBombRadius(); i++)
 		{
 			if (!(_board.getEntityAt(i, this.getY()) instanceof Wall))
 				rightRadius++;
 			else break;
 		}
-		for (int i = (int) this.getX() - 1; i >= (int) this.getX() - _baseRadius; i--)
+		for (int i = (int) this.getX() - 1; i >= (int) this.getX() - Game.getBombRadius(); i--)
 		{
 			if (!(_board.getEntityAt(i, this.getY()) instanceof Wall))
 				leftRadius++;
 			else break;
 		}
-		for (int i = (int) this.getY() + 1; i <= (int) this.getY() + _baseRadius; i++)
+		for (int i = (int) this.getY() + 1; i <= (int) this.getY() + Game.getBombRadius(); i++)
 		{
  			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				downRadius++;
 			else break;
 		}
-		for (int i = (int) this.getY() - 1; i >= (int) this.getY() - _baseRadius; i--)
+		for (int i = (int) this.getY() - 1; i >= (int) this.getY() - Game.getBombRadius(); i--)
 		{
 			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				upRadius++;
