@@ -78,7 +78,8 @@ public class FileLevelLoader extends LevelLoader {
 	}
 
 	@Override
-	public void createEntities() {
+	public void createEntities() throws LoadLevelException 
+	{
             // TODO: tạo các Entity của màn chơi
             // TODO: sau khi tạo xong, gọi _board.addEntity() để thêm Entity vào game
 

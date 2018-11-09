@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import kuusisto.tinysound.TinySound;
+
 /**
  * Quản lý thao tác điều khiển, load level, render các màn hình của game
  */
@@ -94,13 +96,15 @@ public class Board implements IRender {
 		_characters.clear();
 		_bombs.clear();
 		_messages.clear();
+		resetBomberStats();
 		
 		try {
 			_levelLoader = new FileLevelLoader(this, level);
 			_entities = new Entity[_levelLoader.getHeight() * _levelLoader.getWidth()];
 			
 			_levelLoader.createEntities();
-		} catch (LoadLevelException e) {
+			
+		} catch (Exception e) {
 			endGame();
 		}
 	}
@@ -114,6 +118,7 @@ public class Board implements IRender {
 		_screenToShow = 1;
 		_game.resetScreenDelay();
 		_game.pause();
+		TinySound.shutdown();
 	}
 	
 	public boolean detectNoEnemies() {
@@ -303,6 +308,13 @@ public class Board implements IRender {
 			else
 				_messages.remove(i);
 		}
+	}
+	
+	protected void resetBomberStats()
+	{
+		Game.bomberSpeed = 1.0;
+		Game.bombRate = 1;
+		Game.bombRadius = 1;
 	}
 
 	public int subtractTime() {

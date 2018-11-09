@@ -16,6 +16,8 @@ import uet.oop.bomberman.level.Coordinates;
 
 import java.util.Iterator;
 import java.util.List;
+import kuusisto.tinysound.Sound;
+import kuusisto.tinysound.TinySound;
 
 public class Bomber extends Character {
 
@@ -95,6 +97,9 @@ public class Bomber extends Character {
     {
        _bombs.add(new Bomb(x, y, _board));
     	// TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
+       Sound planted = TinySound.loadSound("/uet/oop/bomberman/sounds/bombplanted.wav");
+       planted.play();
+       
     }
 
     private void clearBombs() {

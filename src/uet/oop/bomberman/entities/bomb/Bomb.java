@@ -1,5 +1,7 @@
 package uet.oop.bomberman.entities.bomb;
 
+import kuusisto.tinysound.Sound;
+import kuusisto.tinysound.TinySound;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
@@ -119,7 +121,9 @@ public class Bomb extends AnimatedEntitiy {
 		_flames[2] = new Flame((int) this.getX(),(int) this.getY(), 2, downRadius, _board);
 		_flames[3] = new Flame((int) this.getX(),(int) this.getY(), 3, leftRadius, _board);
 		
-		
+		// Tiếng bom nổ
+		Sound exploded = TinySound.loadSound("/uet/oop/bomberman/sounds/bombexploded.wav");
+	    exploded.play();
 	}
 	
 	public FlameSegment flameAt(int x, int y) {

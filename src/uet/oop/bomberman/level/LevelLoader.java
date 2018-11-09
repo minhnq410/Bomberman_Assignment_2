@@ -20,7 +20,7 @@ public abstract class LevelLoader {
 
 	public abstract void loadLevel(int level) throws LoadLevelException;
 
-	public abstract void createEntities();
+	public abstract void createEntities() throws LoadLevelException;
 
 	public int getWidth() {
 		return _width;
