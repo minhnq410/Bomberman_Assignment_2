@@ -123,7 +123,7 @@ public class Bomb extends AnimatedEntitiy {
 		
 		// Tiếng bom nổ
 		Sound exploded = TinySound.loadSound("/uet/oop/bomberman/sounds/bombexploded.wav");
-	    exploded.play();
+		exploded.play(0.125);
 	}
 	
 	public FlameSegment flameAt(int x, int y) {
