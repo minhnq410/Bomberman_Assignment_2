@@ -6,16 +6,20 @@ import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.graphics.Sprite;
 
-public class Portal extends Tile {
+public class Portal extends Tile
+{
 
 	private Board _board;
-	public Portal(int x, int y, Sprite sprite, Board board) {
+
+	public Portal(int x, int y, Sprite sprite, Board board)
+	{
 		super(x, y, sprite);
 		_board = board;
 	}
-	
+
 	@Override
-	public boolean collide(Entity e) {
+	public boolean collide(Entity e)
+	{
 		if (e instanceof Bomber)
 		{
 			boolean allEnemiesDead = true;
@@ -27,7 +31,8 @@ public class Portal extends Tile {
 					break;
 				}
 			}
-			if (allEnemiesDead) _board.nextLevel();
+			if (allEnemiesDead)
+				_board.nextLevel();
 		}
 		return false;
 	}

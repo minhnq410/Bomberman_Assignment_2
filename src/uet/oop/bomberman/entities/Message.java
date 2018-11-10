@@ -7,7 +7,8 @@ import java.awt.*;
 /**
  * Hiển thị thông điệp
  */
-public class Message extends Entity {
+public class Message extends Entity
+{
 
 	protected String _message;
 	protected int _duration;
@@ -16,6 +17,7 @@ public class Message extends Entity {
 
 	/**
 	 * Hiển thị message khi tiêu diệt được Enemy ví dụ (+100)
+	 * 
 	 * @param message
 	 * @param x
 	 * @param y
@@ -23,47 +25,55 @@ public class Message extends Entity {
 	 * @param color
 	 * @param size
 	 */
-	public Message(String message, double x, double y, int duration, Color color, int size) {
-		_x =x;
+	public Message(String message, double x, double y, int duration, Color color, int size)
+	{
+		_x = x;
 		_y = y;
 		_message = message;
-		_duration = duration * 60; //seconds
+		_duration = duration * 60; // seconds
 		_color = color;
 		_size = size;
 	}
 
-	public int getDuration() {
+	public int getDuration()
+	{
 		return _duration;
 	}
 
-	public void setDuration(int _duration) {
+	public void setDuration(int _duration)
+	{
 		this._duration = _duration;
 	}
 
-	public String getMessage() {
+	public String getMessage()
+	{
 		return _message;
 	}
 
-	public Color getColor() {
+	public Color getColor()
+	{
 		return _color;
 	}
 
-	public int getSize() {
+	public int getSize()
+	{
 		return _size;
 	}
 
 	@Override
-	public void update() {
+	public void update()
+	{
 	}
 
 	@Override
-	public void render(Screen screen) {
+	public void render(Screen screen)
+	{
 	}
 
 	@Override
-	public boolean collide(Entity e) {
+	public boolean collide(Entity e)
+	{
 		return true;
 	}
-	
-	
+
 }

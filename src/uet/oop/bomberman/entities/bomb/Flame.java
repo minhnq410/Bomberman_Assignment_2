@@ -11,7 +11,8 @@ import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.entities.character.Character;
 
-public class Flame extends Entity {
+public class Flame extends Entity
+{
 
 	protected Board _board;
 	protected int _direction;
@@ -21,12 +22,13 @@ public class Flame extends Entity {
 
 	/**
 	 *
-	 * @param x hoành độ bắt đầu của Flame
-	 * @param y tung độ bắt đầu của Flame
+	 * @param x         hoành độ bắt đầu của Flame
+	 * @param y         tung độ bắt đầu của Flame
 	 * @param direction là hướng của Flame
-	 * @param radius độ dài cực đại của Flame
+	 * @param radius    độ dài cực đại của Flame
 	 */
-	public Flame(int x, int y, int direction, int radius, Board board) {
+	public Flame(int x, int y, int direction, int radius, Board board)
+	{
 		xOrigin = x;
 		yOrigin = y;
 		_x = x;
@@ -40,7 +42,8 @@ public class Flame extends Entity {
 	/**
 	 * Tạo các FlameSegment, mỗi segment ứng một đơn vị độ dài
 	 */
-	private void createFlameSegments() {
+	private void createFlameSegments()
+	{
 		/**
 		 * tính toán độ dài Flame, tương ứng với số lượng segment
 		 */
@@ -55,180 +58,232 @@ public class Flame extends Entity {
 		{
 			for (int i = 0; i < _flameSegments.length; i++)
 			{
-				
+
 				if (i == _flameSegments.length - 1)
 				{
-					_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() - i - 1, _direction, true);
-					if (_board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY()) instanceof LayeredEntity)
+					_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() - i - 1, _direction,
+							true);
+					if (_board.getEntityAt((int) _flameSegments[i].getX(),
+							(int) _flameSegments[i].getY()) instanceof LayeredEntity)
 					{
-						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
+						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(),
+								(int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()), _flameSegments[i]);
+					else _board.addEntity(
+							(int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()),
+							_flameSegments[i]);
 				}
-				else 
+				else
 				{
-					_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() - i - 1, _direction, false);
-					if (_board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY()) instanceof LayeredEntity)
+					_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() - i - 1, _direction,
+							false);
+					if (_board.getEntityAt((int) _flameSegments[i].getX(),
+							(int) _flameSegments[i].getY()) instanceof LayeredEntity)
 					{
-						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
+						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(),
+								(int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
+
+					else _board.addEntity(
+							(int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()),
+							_flameSegments[i]);
 				}
-				
+
 			}
 		}
 		if (_direction == 1) // Right
 		{
 			for (int i = 0; i < _flameSegments.length; i++)
 			{
-				
+
 				if (i == _flameSegments.length - 1)
 				{
-					_flameSegments[i] = new FlameSegment((int) this.getX() + i + 1, (int) this.getY(), _direction, true);
-					if (_board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY()) instanceof LayeredEntity)
+					_flameSegments[i] = new FlameSegment((int) this.getX() + i + 1, (int) this.getY(), _direction,
+							true);
+					if (_board.getEntityAt((int) _flameSegments[i].getX(),
+							(int) _flameSegments[i].getY()) instanceof LayeredEntity)
 					{
-						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
+						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(),
+								(int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
+
+					else _board.addEntity(
+							(int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()),
+							_flameSegments[i]);
 				}
 				else
 				{
-					_flameSegments[i] = new FlameSegment((int) this.getX() + i + 1, (int) this.getY(), _direction, false);
-					if (_board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY()) instanceof LayeredEntity)
+					_flameSegments[i] = new FlameSegment((int) this.getX() + i + 1, (int) this.getY(), _direction,
+							false);
+					if (_board.getEntityAt((int) _flameSegments[i].getX(),
+							(int) _flameSegments[i].getY()) instanceof LayeredEntity)
 					{
-						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
+						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(),
+								(int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()), _flameSegments[i]);
+
+					else _board.addEntity(
+							(int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()),
+							_flameSegments[i]);
 				}
-				
+
 			}
 		}
 		if (_direction == 2) // Down
 		{
 			for (int i = 0; i < _flameSegments.length; i++)
 			{
-				
+
 				if (i == _flameSegments.length - 1)
 				{
-					_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() + i + 1, _direction, true);
-					if (_board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY()) instanceof LayeredEntity)
+					_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() + i + 1, _direction,
+							true);
+					if (_board.getEntityAt((int) _flameSegments[i].getX(),
+							(int) _flameSegments[i].getY()) instanceof LayeredEntity)
 					{
-						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
+						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(),
+								(int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
+
+					else _board.addEntity(
+							(int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()),
+							_flameSegments[i]);
 				}
 				else
 				{
-					_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() + i + 1, _direction, false);
-					if (_board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY()) instanceof LayeredEntity)
+					_flameSegments[i] = new FlameSegment((int) this.getX(), (int) this.getY() + i + 1, _direction,
+							false);
+					if (_board.getEntityAt((int) _flameSegments[i].getX(),
+							(int) _flameSegments[i].getY()) instanceof LayeredEntity)
 					{
-						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
+						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(),
+								(int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
+
+					else _board.addEntity(
+							(int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()),
+							_flameSegments[i]);
 				}
-				
+
 			}
 		}
 		if (_direction == 3) // Left
 		{
 			for (int i = 0; i < _flameSegments.length; i++)
-			{				
+			{
 				if (i == _flameSegments.length - 1)
 				{
-					_flameSegments[i] = new FlameSegment((int) this.getX() - i - 1, (int) this.getY(), _direction, true);
-					if (_board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY()) instanceof LayeredEntity)
+					_flameSegments[i] = new FlameSegment((int) this.getX() - i - 1, (int) this.getY(), _direction,
+							true);
+					if (_board.getEntityAt((int) _flameSegments[i].getX(),
+							(int) _flameSegments[i].getY()) instanceof LayeredEntity)
 					{
-						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
+						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(),
+								(int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
+					else _board.addEntity(
+							(int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()),
+							_flameSegments[i]);
 				}
 				else
 				{
-					_flameSegments[i] = new FlameSegment((int) this.getX() - i - 1, (int) this.getY(), _direction, false);
-					if (_board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY()) instanceof LayeredEntity)
+					_flameSegments[i] = new FlameSegment((int) this.getX() - i - 1, (int) this.getY(), _direction,
+							false);
+					if (_board.getEntityAt((int) _flameSegments[i].getX(),
+							(int) _flameSegments[i].getY()) instanceof LayeredEntity)
 					{
-						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY());
+						LayeredEntity tmp = (LayeredEntity) _board.getEntityAt((int) _flameSegments[i].getX(),
+								(int) _flameSegments[i].getY());
 						tmp.addToTop(_flameSegments[i]);
 					}
-					else _board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY() *  _board.getLevel().getWidth()), _flameSegments[i]);
+					else _board.addEntity(
+							(int) (_flameSegments[i].getX() + _flameSegments[i].getY() * _board.getLevel().getWidth()),
+							_flameSegments[i]);
 				}
-		
+
 			}
 		}
 	}
 
 	/**
-	 * Tính toán độ dài của Flame, nếu gặp vật cản là Brick/Wall, độ dài sẽ bị cắt ngắn
+	 * Tính toán độ dài của Flame, nếu gặp vật cản là Brick/Wall, độ dài sẽ bị cắt
+	 * ngắn
+	 * 
 	 * @return
 	 */
-	private int calculatePermitedDistance() {
+	private int calculatePermitedDistance()
+	{
 		return _radius;
 	}
-	
-	public FlameSegment flameSegmentAt(int x, int y) {
-		for (int i = 0; i < _flameSegments.length; i++) {
-			if(_flameSegments[i].getX() == x && _flameSegments[i].getY() == y)
+
+	public FlameSegment flameSegmentAt(int x, int y)
+	{
+		for (int i = 0; i < _flameSegments.length; i++)
+		{
+			if (_flameSegments[i].getX() == x && _flameSegments[i].getY() == y)
 				return _flameSegments[i];
 		}
 		return null;
 	}
 
-	//Xóa vết lửa sau khi bom nổ
+	// Xóa vết lửa sau khi bom nổ
 	@Override
-	public void update() 
+	public void update()
 	{
-		if (this.getBounds().intersects(_board.getBomber().getBounds())) this.collide(_board.getBomber());
+		if (this.getBounds().intersects(_board.getBomber().getBounds()))
+			this.collide(_board.getBomber());
 		for (int i = 0; i < _flameSegments.length; i++)
 		{
 			if (_board.getBombAt(_flameSegments[i].getX(), _flameSegments[i].getY()) != null)
 				_board.getBombAt(_flameSegments[i].getX(), _flameSegments[i].getY()).collide(this);
 		}
 		for (int i = 0; i < _board._entities.length; i++)
+		{
+			if (_board._entities[i] instanceof LayeredEntity)
 			{
-				if (_board._entities[i] instanceof LayeredEntity) 
+				LayeredEntity tmp = (LayeredEntity) _board._entities[i];
+				if (tmp.getTopEntity() instanceof FlameSegment)
 				{
-					LayeredEntity tmp = (LayeredEntity) _board._entities[i];
-					if (tmp.getTopEntity() instanceof FlameSegment)
+					while (!(tmp.getTopEntity() instanceof Grass) && !(tmp.getTopEntity() instanceof Item)
+							&& !(tmp.getTopEntity() instanceof Portal))
 					{
-						while (!(tmp.getTopEntity() instanceof Grass) && !(tmp.getTopEntity() instanceof Item) && !(tmp.getTopEntity() instanceof Portal))
-						{
-							tmp.getTopEntity().remove();
-							tmp.update();
-						}
-					}
-					else if (tmp.getTopEntity() instanceof Grass)
-					{
-						_board.addEntity(i, new Grass((int) _board._entities[i].getX(),(int) _board._entities[i].getY(), Sprite.grass));
+						tmp.getTopEntity().remove();
+						tmp.update();
 					}
 				}
-				else if (_board._entities[i] instanceof FlameSegment)
+				else if (tmp.getTopEntity() instanceof Grass)
 				{
-					_board.addEntity(i, new Grass((int) _board._entities[i].getX(),(int) _board._entities[i].getY(), Sprite.grass));
+					_board.addEntity(i, new Grass((int) _board._entities[i].getX(), (int) _board._entities[i].getY(),
+							Sprite.grass));
 				}
 			}
+			else if (_board._entities[i] instanceof FlameSegment)
+			{
+				_board.addEntity(i,
+						new Grass((int) _board._entities[i].getX(), (int) _board._entities[i].getY(), Sprite.grass));
+			}
+		}
 	}
-	
+
 	@Override
-	public void render(Screen screen) {
-		for (int i = 0; i < _flameSegments.length; i++) {
+	public void render(Screen screen)
+	{
+		for (int i = 0; i < _flameSegments.length; i++)
+		{
 			_flameSegments[i].render(screen);
 		}
 	}
 
 	@Override
-	public boolean collide(Entity e) {
+	public boolean collide(Entity e)
+	{
 		if (e instanceof Character)
 		{
 			((Character) e).kill();

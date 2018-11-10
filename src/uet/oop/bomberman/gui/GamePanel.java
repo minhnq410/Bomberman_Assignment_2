@@ -8,11 +8,13 @@ import java.awt.*;
 /**
  * Swing Panel chứa cảnh game
  */
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel
+{
 
 	private Game _game;
-	
-	public GamePanel(Frame frame) {
+
+	public GamePanel(Frame frame)
+	{
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE));
 
@@ -24,11 +26,12 @@ public class GamePanel extends JPanel {
 
 		setVisible(true);
 		setFocusable(true);
-		
+
 	}
 
-	public Game getGame() {
+	public Game getGame()
+	{
 		return _game;
 	}
-	
+
 }
