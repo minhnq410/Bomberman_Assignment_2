@@ -97,8 +97,8 @@ public class Bomber extends Character {
     {
        _bombs.add(new Bomb(x, y, _board));
     	// TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
-       Sound planted = TinySound.loadSound("/uet/oop/bomberman/sounds/bombplanted.wav");
-       planted.play(0.125);
+        Sound planted = TinySound.loadSound("sounds/bombplanted.wav");
+        planted.play(0.125);
        
     }
 
