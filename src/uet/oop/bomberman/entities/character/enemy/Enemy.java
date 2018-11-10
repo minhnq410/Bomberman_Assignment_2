@@ -91,10 +91,10 @@ public abstract class Enemy extends Character {
 		if(_direction == 0)
                 {
                     ya++;
-                    if (canMove(this._x + this.getSprite().SIZE/4, this._y + this.getSprite().SIZE*3/4) && canMove(this._x, this._y + this.getSprite().SIZE*3/4))
+                    if (canMove(this._x + this.getSprite().SIZE/2, this._y + this.getSprite().SIZE*3/4) && canMove(this._x, this._y + this.getSprite().SIZE*3/4))
                     {
-	    		_steps -= 1 + rest;
-			move(xa * _speed, ya * _speed);
+	    		_steps --;
+			move(0,  _speed);
 			_moving = true;
                     } else {
 			_steps = 0;
@@ -105,10 +105,10 @@ public abstract class Enemy extends Character {
 		if(_direction == 1)
                 {
                     xa++;
-                    if (canMove(this._x + this.getSprite().SIZE/4 + 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x + this.getSprite().SIZE/4 + 1, this._y))
+                    if (canMove(this._x + this.getSprite().SIZE/2 + 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x + this.getSprite().SIZE/2 + 1, this._y))
                     {
-	    		_steps -= 1 + rest;
-			move(xa * _speed, ya * _speed);
+	    		_steps --;
+			move(_speed,0);
 			_moving = true;
                     } else {
 			_steps = 0;
@@ -119,10 +119,10 @@ public abstract class Enemy extends Character {
 		if(_direction == 2)
                 {
                     xa--;
-                    if (canMove(this._x - this.getSprite().SIZE/4 - 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x - this.getSprite().SIZE/4 - 1, this._y))
+                    if (canMove(this._x - this.getSprite().SIZE/2 - 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x - this.getSprite().SIZE/2 - 1, this._y))
                     {
-	    		_steps -= 1 + rest;
-			move(xa * _speed, ya * _speed);
+	    		_steps --;
+			move(-_speed, 0);
 			_moving = true;
                     } else {
 			_steps = 0;
@@ -133,10 +133,10 @@ public abstract class Enemy extends Character {
 		if(_direction == 3)
                 {
                     ya--;
-                    if (canMove(this._x + this.getSprite().SIZE/4, this._y - this.getSprite().SIZE/4) && canMove(this._x, this._y - this.getSprite().SIZE/4))
+                    if (canMove(this._x + this.getSprite().SIZE/2, this._y - this.getSprite().SIZE/4) && canMove(this._x, this._y - this.getSprite().SIZE/4))
                     {
-	    		_steps -= 1 + rest;
-			move(xa * _speed, ya * _speed);
+	    		_steps --;
+			move(0, -_speed);
 			_moving = true;
                     } else {
 			_steps = 0;
