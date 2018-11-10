@@ -174,10 +174,7 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) 
     {
-    	if (_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)).collide(this) && !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)) instanceof Grass))
-    		return false;
-    	
-    	else return true;
+        return !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)).collide(this) && !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)) instanceof Grass));
     }
 
     @Override

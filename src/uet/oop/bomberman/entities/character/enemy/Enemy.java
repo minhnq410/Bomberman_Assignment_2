@@ -13,6 +13,7 @@ import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
 
 import java.awt.*;
+import uet.oop.bomberman.entities.tile.Grass;
 
 public abstract class Enemy extends Character {
 
@@ -80,7 +81,70 @@ public abstract class Enemy extends Character {
                 //       hướng đi xuống/phải/trái/lên tương ứng với các giá trị 0/1/2/3
 		// TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không
 		// TODO: sử dụng move() để di chuyển
-		// TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển                
+		// TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển
+                int xa = 0, ya = 0;
+		if(_steps <= 0){
+			_direction = _ai.calculateDirection();
+			_steps = MAX_STEPS;
+		}
+			
+		if(_direction == 0)
+                {
+                    ya++;
+                    if (canMove(this._x + this.getSprite().SIZE/4, this._y + this.getSprite().SIZE*3/4) && canMove(this._x, this._y + this.getSprite().SIZE*3/4))
+                    {
+	    		_steps -= 1 + rest;
+			move(xa * _speed, ya * _speed);
+			_moving = true;
+                    } else {
+			_steps = 0;
+			_moving = false;
+	    		
+                    }
+                } 
+		if(_direction == 1)
+                {
+                    xa++;
+                    if (canMove(this._x + this.getSprite().SIZE/4 + 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x + this.getSprite().SIZE/4 + 1, this._y))
+                    {
+	    		_steps -= 1 + rest;
+			move(xa * _speed, ya * _speed);
+			_moving = true;
+                    } else {
+			_steps = 0;
+			_moving = false;
+	    		
+                    }
+                }
+		if(_direction == 2)
+                {
+                    xa--;
+                    if (canMove(this._x - this.getSprite().SIZE/4 - 1, this._y + this.getSprite().SIZE/2 + 1) && canMove(this._x - this.getSprite().SIZE/4 - 1, this._y))
+                    {
+	    		_steps -= 1 + rest;
+			move(xa * _speed, ya * _speed);
+			_moving = true;
+                    } else {
+			_steps = 0;
+			_moving = false;
+	    		
+                    }
+                }
+		if(_direction == 3)
+                {
+                    ya--;
+                    if (canMove(this._x + this.getSprite().SIZE/4, this._y - this.getSprite().SIZE/4) && canMove(this._x, this._y - this.getSprite().SIZE/4))
+                    {
+	    		_steps -= 1 + rest;
+			move(xa * _speed, ya * _speed);
+			_moving = true;
+                    } else {
+			_steps = 0;
+			_moving = false;
+	    		
+                    }
+                }
+		     
 	}
 	
 	@Override
@@ -93,7 +157,8 @@ public abstract class Enemy extends Character {
 	@Override
 	public boolean canMove(double x, double y) {
 		// TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
-		return false;
+                return !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)).collide(this) && !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE/4), Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE/4)) instanceof Grass));
+		//return false;
 	}
 
 	@Override
