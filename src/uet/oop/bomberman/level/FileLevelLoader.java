@@ -126,6 +126,13 @@ public class FileLevelLoader extends LevelLoader {
 					_board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
 					break;
 				}
+                                case '3':
+                                {
+					_board.addCharacter(new Ghost(Coordinates.tileToPixel(x),
+							Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+					_board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
+					break;
+				}
 				case 'b': // Bomb item
 				{
 					_board.addEntity(x + y * _width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass),

@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.tile.destroyable;
 
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.bomb.FlameSegment;
+import uet.oop.bomberman.entities.character.enemy.Ghost;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Tile;
 import uet.oop.bomberman.graphics.Sprite;
@@ -50,10 +51,15 @@ public class DestroyableTile extends Tile
 		{
 			this._destroyed = true;
 		}
+                if ((e instanceof Ghost))
+		{
+			return false;
+		}
 		if (!(e instanceof Grass))
 		{
 			return this.getBounds().intersects(e.getBounds());
 		}
+                
 		return false;
 	}
 
