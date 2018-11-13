@@ -10,7 +10,7 @@ public class Keyboard implements KeyListener
 {
 
 	private boolean[] keys = new boolean[120]; // 120 is enough to this game
-	public boolean up, down, left, right, space;
+	public boolean up, down, left, right, space, esc;
 
 	public void update()
 	{
@@ -19,6 +19,7 @@ public class Keyboard implements KeyListener
 		left = keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
 		space = keys[KeyEvent.VK_SPACE] || keys[KeyEvent.VK_SHIFT];
+		esc = keys[KeyEvent.VK_ESCAPE];
 	}
 
 	@Override

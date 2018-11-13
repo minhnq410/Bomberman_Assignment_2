@@ -4,22 +4,23 @@ import uet.oop.bomberman.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Swing Frame chứa toàn bộ các component
  */
 public class Frame extends JFrame
 {
-
+	
 	public GamePanel _gamepane;
 	private JPanel _containerpane;
 	private InfoPanel _infopanel;
-
+	
 	private Game _game;
-
+	
 	public Frame()
 	{
-
 		_containerpane = new JPanel(new BorderLayout());
 		_gamepane = new GamePanel(this);
 		_infopanel = new InfoPanel(_gamepane.getGame());
@@ -28,7 +29,7 @@ public class Frame extends JFrame
 		_containerpane.add(_gamepane, BorderLayout.PAGE_END);
 
 		_game = _gamepane.getGame();
-
+		
 		add(_containerpane);
 
 		setResizable(false);
@@ -48,5 +49,4 @@ public class Frame extends JFrame
 	{
 		_infopanel.setPoints(points);
 	}
-
 }

@@ -5,15 +5,23 @@ import uet.oop.bomberman.gui.Frame;
 import uet.oop.bomberman.input.Keyboard;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  * Tạo vòng lặp cho game, lưu trữ một vài tham số cấu hình toàn cục, Gọi phương
  * thức render(), update() cho tất cả các entity
  */
-public class Game extends Canvas
+public class Game extends Canvas implements MouseListener
 {
 
 	public static final int TILES_SIZE = 16, WIDTH = TILES_SIZE * (31 / 2), HEIGHT = 13 * TILES_SIZE;
@@ -40,11 +48,12 @@ public class Game extends Canvas
 	private Keyboard _input;
 	private boolean _running = false;
 	private boolean _paused = true;
-
+	private boolean _menu = true;
+	
 	private Board _board;
 	private Screen screen;
 	private Frame _frame;
-
+	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
@@ -55,9 +64,10 @@ public class Game extends Canvas
 
 		screen = new Screen(WIDTH, HEIGHT);
 		_input = new Keyboard();
-
+		
 		_board = new Board(this, _input, screen);
 		addKeyListener(_input);
+		addMouseListener(this);
 	}
 
 	private void renderGame()
@@ -113,9 +123,12 @@ public class Game extends Canvas
 	}
 
 	public void start()
-	{
+	{		
+		
+		//while (_menu)
+			//renderScreen();
 		_running = true;
-
+		
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 60.0; // nanosecond, 60 frames per second
@@ -123,8 +136,20 @@ public class Game extends Canvas
 		int frames = 0;
 		int updates = 0;
 		requestFocus();
+		
 		while (_running)
 		{
+			/* try
+			{
+				Thread.sleep(13);
+			} 
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			} */
+			//TODO: Giải quyết fps
+			
+			
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
@@ -134,22 +159,25 @@ public class Game extends Canvas
 				updates++;
 				delta--;
 			}
-
+			
+			if (_input.esc) _paused = true;
+			
+			
 			if (_paused)
 			{
+				
 				if (_screenDelay <= 0)
 				{
-					_board.setShow(-1);
+					_board.setShow(3);
 					_paused = false;
 				}
-
 				renderScreen();
 			}
 			else
 			{
 				renderGame();
 			}
-
+			
 			frames++;
 			if (System.currentTimeMillis() - timer > 1000)
 			{
@@ -159,7 +187,7 @@ public class Game extends Canvas
 				_frame.setTitle(TITLE + " | " + updates + " rate, " + frames + " fps");
 				updates = 0;
 				frames = 0;
-
+			
 				if (_board.getShow() == 2)
 					--_screenDelay;
 			}
@@ -215,5 +243,34 @@ public class Game extends Canvas
 	{
 		_paused = true;
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+		/* Rectangle playButton = new Rectangle(Game.WIDTH, Game.HEIGHT + 50, 200, 100);
+		if (playButton.contains(e.getX(), e.getY()));
+		{
+			_menu = false;
+			_running = true;
+			_board.loadLevel(1);
+		} */
+		// TODO: Giải quyết nullpointerexception khi click vào play
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{}
 
 }

@@ -148,6 +148,19 @@ public class Screen
 		int y = (fm.getAscent() + (h - (fm.getAscent() + fm.getDescent())) / 2);
 		g.drawString(s, x, y);
 	}
+	
+	public void drawMenu(Graphics g)
+	{
+		Font font = new Font("Arial", Font.PLAIN, 20*Game.SCALE);
+		Graphics2D paint = (Graphics2D) g;
+		Shape play = new Rectangle(Game.WIDTH, Game.HEIGHT + 50, 200, 100);
+		paint.draw(play);
+		paint.setColor(Color.GREEN);
+		paint.fill(play);
+		paint.setColor(Color.BLACK);
+		paint.setFont(font);
+		paint.drawString("PLAY", Game.WIDTH + 25, Game.HEIGHT + 120);
+	}
 
 	public int getWidth()
 	{

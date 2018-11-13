@@ -14,9 +14,13 @@ import uet.oop.bomberman.level.FileLevelLoader;
 import uet.oop.bomberman.level.LevelLoader;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.JPanel;
 
 import kuusisto.tinysound.TinySound;
 
@@ -35,18 +39,18 @@ public class Board implements IRender
 	protected List<Bomb> _bombs = new ArrayList<>();
 	private List<Message> _messages = new ArrayList<>();
 
-	private int _screenToShow = -1; // 1:endgame, 2:changelevel, 3:paused
+	private int _screenToShow = -1; // 1:endgame, 2:changelevel, 3:paused, 4:menu
 
 	private int _time = Game.TIME;
 	private int _points = Game.POINTS;
-
+	
 	public Board(Game game, Keyboard input, Screen screen)
 	{
 		_game = game;
 		_input = input;
 		_screen = screen;
-
-		loadLevel(1); // start in level 1
+		
+		loadLevel(1); //Menu screen
 	}
 
 	@Override
@@ -153,15 +157,18 @@ public class Board implements IRender
 	{
 		switch (_screenToShow)
 		{
-		case 1:
-			_screen.drawEndGame(g, _points);
-			break;
-		case 2:
-			_screen.drawChangeLevel(g, _levelLoader.getLevel());
-			break;
-		case 3:
-			_screen.drawPaused(g);
-			break;
+			case 1:
+				_screen.drawEndGame(g, _points);
+				break;
+			case 2:
+				_screen.drawChangeLevel(g, _levelLoader.getLevel());
+				break;
+			case 3:
+				_screen.drawPaused(g);
+				break;
+			case 4:
+				_screen.drawMenu(g);
+				break;
 		}
 	}
 
