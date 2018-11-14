@@ -140,8 +140,8 @@ public class Bomb extends AnimatedEntitiy
 		_flames[3] = new Flame((int) this.getX(), (int) this.getY(), 3, leftRadius, _board);
 
 		// Tiếng bom nổ
-		Sound exploded = TinySound.loadSound("sounds/bombexploded.wav");
-		exploded.play(0.125);
+		//Sound exploded = TinySound.loadSound("sounds/bombexploded.wav");
+		//exploded.play(0.125);
 	}
 
 	public FlameSegment flameAt(int x, int y)

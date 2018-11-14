@@ -170,7 +170,6 @@ public abstract class Enemy extends Character
 
 			}
 		}
-
 	}
 
 	@Override
@@ -180,6 +179,7 @@ public abstract class Enemy extends Character
 			return;
 		_y += ya;
 		_x += xa;
+
 	}
 
 	@Override
@@ -193,9 +193,8 @@ public abstract class Enemy extends Character
 				.collide(this)
 				&& !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE / 4),
 						Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE / 4)) instanceof Grass));
-		// return false;
-	}
 
+	}
 	@Override
 	public boolean collide(Entity e)
 	{
@@ -208,6 +207,7 @@ public abstract class Enemy extends Character
 			}
 		}
 		return e.collide(this);
+		
 	}
 
 	@Override

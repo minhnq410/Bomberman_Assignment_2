@@ -17,6 +17,9 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import kuusisto.tinysound.Music;
+import kuusisto.tinysound.TinySound;
+
 /**
  * Tạo vòng lặp cho game, lưu trữ một vài tham số cấu hình toàn cục, Gọi phương
  * thức render(), update() cho tất cả các entity
@@ -128,7 +131,8 @@ public class Game extends Canvas implements MouseListener
 		//while (_menu)
 			//renderScreen();
 		_running = true;
-		
+		Music background = TinySound.loadMusic("sounds/background.wav");
+		background.play(true);
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 60.0; // nanosecond, 60 frames per second

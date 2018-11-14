@@ -233,7 +233,6 @@ public class Flame extends Entity
 		return null;
 	}
 
-	// Xóa vết lửa sau khi bom nổ
 	@Override
 	public void update()
 	{
@@ -244,11 +243,12 @@ public class Flame extends Entity
 			if (_board.getBombAt(_flameSegments[i].getX(), _flameSegments[i].getY()) != null)
 				_board.getBombAt(_flameSegments[i].getX(), _flameSegments[i].getY()).collide(this);
 		}
-		for (int i = 0; i < _board._entities.length; i++)
+		// Xóa vết lửa sau khi bom nổ
+		for (int i = 0; i < _flameSegments.length; i++)
 		{
-			if (_board._entities[i] instanceof LayeredEntity)
+			if (_board.getEntityAt(_flameSegments[i].getX(), _flameSegments[i].getY()) instanceof LayeredEntity)
 			{
-				LayeredEntity tmp = (LayeredEntity) _board._entities[i];
+				LayeredEntity tmp = (LayeredEntity) _board.getEntityAt(_flameSegments[i].getX(), _flameSegments[i].getY());
 				if (tmp.getTopEntity() instanceof FlameSegment)
 				{
 					while (!(tmp.getTopEntity() instanceof Grass) && !(tmp.getTopEntity() instanceof Item)
@@ -260,17 +260,18 @@ public class Flame extends Entity
 				}
 				else if (tmp.getTopEntity() instanceof Grass)
 				{
-					_board.addEntity(i, new Grass((int) _board._entities[i].getX(), (int) _board._entities[i].getY(),
+					_board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY()*_board.getLevel().getWidth()), new Grass((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY(),
 							Sprite.grass));
 				}
 			}
-			else if (_board._entities[i] instanceof FlameSegment)
+			else if (_board.getEntityAt(_flameSegments[i].getX(), _flameSegments[i].getY()) instanceof FlameSegment)
 			{
-				_board.addEntity(i,
-						new Grass((int) _board._entities[i].getX(), (int) _board._entities[i].getY(), Sprite.grass));
+				_board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY()*_board.getLevel().getWidth()), new Grass((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY(), Sprite.grass));
 			}
 		}
+		_board.addEntity((int) (this._x + this._y*_board.getLevel().getWidth()), new Grass((int) this._x, (int) this._y, Sprite.grass));
 	}
+	
 
 	@Override
 	public void render(Screen screen)
