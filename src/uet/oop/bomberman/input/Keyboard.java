@@ -30,15 +30,19 @@ public class Keyboard implements KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		keys[e.getKeyCode()] = true;
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE && keys[e.getKeyCode()] == true)
+		{
+			keys[e.getKeyCode()] = false;
+		}
+		else keys[e.getKeyCode()] = true;
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
-		keys[e.getKeyCode()] = false;
-
+		if (e.getKeyCode() != KeyEvent.VK_ESCAPE)
+			keys[e.getKeyCode()] = false;
 	}
 
 }

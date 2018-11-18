@@ -169,7 +169,6 @@ public class Game extends Canvas implements MouseListener
 			
 			if (_paused)
 			{
-				
 				if (_screenDelay <= 0)
 				{
 					_board.setShow(3);
