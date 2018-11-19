@@ -59,7 +59,9 @@ public class Game extends Canvas implements MouseListener
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-
+	
+	private Music background = TinySound.loadMusic("sounds/background.wav");
+	
 	public Game(Frame frame)
 	{
 		_frame = frame;
@@ -127,12 +129,11 @@ public class Game extends Canvas implements MouseListener
 
 	public void start()
 	{		
+		while (_menu)
+			renderScreen();
 		
-		//while (_menu)
-			//renderScreen();
-		_running = true;
-		Music background = TinySound.loadMusic("sounds/background.wav");
-		background.play(true);
+		background.play(true, 0.5);
+		_board.loadLevel(1);
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 60.0; // nanosecond, 60 frames per second
@@ -142,18 +143,7 @@ public class Game extends Canvas implements MouseListener
 		requestFocus();
 		
 		while (_running)
-		{
-			/* try
-			{
-				Thread.sleep(13);
-			} 
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			} */
-			//TODO: Giải quyết fps
-			
-			
+		{			
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
@@ -163,7 +153,6 @@ public class Game extends Canvas implements MouseListener
 				updates++;
 				delta--;
 			}
-			
 			if (_input.esc) _paused = true;
 			
 			
@@ -250,13 +239,13 @@ public class Game extends Canvas implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		/* Rectangle playButton = new Rectangle(Game.WIDTH, Game.HEIGHT + 50, 200, 100);
-		if (playButton.contains(e.getX(), e.getY()));
+		Rectangle playButton = new Rectangle(Game.WIDTH, Game.HEIGHT + 50, 200, 100);
+		if (playButton.contains(e.getX(), e.getY()) == true)
 		{
 			_menu = false;
 			_running = true;
-			_board.loadLevel(1);
-		} */
+			
+		}
 		// TODO: Giải quyết nullpointerexception khi click vào play
 	}
 

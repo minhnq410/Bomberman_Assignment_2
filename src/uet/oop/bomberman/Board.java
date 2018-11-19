@@ -50,7 +50,7 @@ public class Board implements IRender
 		_input = input;
 		_screen = screen;
 		
-		loadLevel(1); //Menu screen
+		_screenToShow = 4; //Menu screen
 	}
 
 	@Override

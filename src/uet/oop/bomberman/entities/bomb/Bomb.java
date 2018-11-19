@@ -24,7 +24,9 @@ public class Bomb extends AnimatedEntitiy
 	protected Flame[] _flames;
 	protected boolean _exploded = false;
 	public boolean _allowedToPassThru = true;
-
+	private Sound exploded = TinySound.loadSound("sounds/bombexploded.wav");
+		
+	
 	public Bomb(int x, int y, Board board)
 	{
 		_x = x;
@@ -138,10 +140,8 @@ public class Bomb extends AnimatedEntitiy
 		_flames[1] = new Flame((int) this.getX(), (int) this.getY(), 1, rightRadius, _board);
 		_flames[2] = new Flame((int) this.getX(), (int) this.getY(), 2, downRadius, _board);
 		_flames[3] = new Flame((int) this.getX(), (int) this.getY(), 3, leftRadius, _board);
-
-		// Tiếng bom nổ
-		//Sound exploded = TinySound.loadSound("sounds/bombexploded.wav");
-		//exploded.play(0.125);
+		
+		exploded.play(0.125);
 	}
 
 	public FlameSegment flameAt(int x, int y)

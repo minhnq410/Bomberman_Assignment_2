@@ -6,6 +6,11 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Xử lý render cho tất cả Entity và một số màn hình phụ ra Game Panel
@@ -151,15 +156,40 @@ public class Screen
 	
 	public void drawMenu(Graphics g)
 	{
-		Font font = new Font("Arial", Font.PLAIN, 20*Game.SCALE);
 		Graphics2D paint = (Graphics2D) g;
-		Shape play = new Rectangle(Game.WIDTH, Game.HEIGHT + 50, 200, 100);
+		
+		BufferedImage background = null;
+		
+		try
+		{
+			background = ImageIO.read(new File("res/backgroundimage.png"));
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		Shape play = new Rectangle(Game.WIDTH + 10, Game.HEIGHT + 50, 195, 100);
+		
+		//Vẽ hình nền
+		g.drawImage(background, 0, 0, null);
+		
+		//Vẽ nút play
+		paint.setColor(Color.BLACK);
 		paint.draw(play);
 		paint.setColor(Color.GREEN);
 		paint.fill(play);
+		
+		//Vẽ tên trò chơi
+		paint.setColor(new Color(239, 249, 39));
+		paint.setFont(new Font("Calibri", Font.BOLD, 30*Game.SCALE));
+		paint.drawString("BOMBERMAN", 110, 120);
+		
+		//Vẽ chữ play
 		paint.setColor(Color.BLACK);
-		paint.setFont(font);
-		paint.drawString("PLAY", Game.WIDTH + 25, Game.HEIGHT + 120);
+		paint.setFont(new Font("Arial", Font.PLAIN, 20*Game.SCALE));
+		paint.drawString("PLAY", Game.WIDTH + 30, Game.HEIGHT + 120);
+		
 	}
 
 	public int getWidth()
