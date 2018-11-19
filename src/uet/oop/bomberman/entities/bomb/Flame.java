@@ -236,6 +236,7 @@ public class Flame extends Entity
 	@Override
 	public void update()
 	{
+		//Kiểm tra va chạm của bom, lửa với các entity khác
 		if (this.getBounds().intersects(_board.getBomber().getBounds()))
 			this.collide(_board.getBomber());
 		for (int i = 0; i < _flameSegments.length; i++)
@@ -269,7 +270,19 @@ public class Flame extends Entity
 				_board.addEntity((int) (_flameSegments[i].getX() + _flameSegments[i].getY()*_board.getLevel().getWidth()), new Grass((int) _flameSegments[i].getX(), (int) _flameSegments[i].getY(), Sprite.grass));
 			}
 		}
-		_board.addEntity((int) (this._x + this._y*_board.getLevel().getWidth()), new Grass((int) this._x, (int) this._y, Sprite.grass));
+		//Xóa entity ở vị trí đặt bom
+		if (_board.getEntityAt(this._x, this._y) instanceof LayeredEntity)
+		{
+			LayeredEntity tmp = (LayeredEntity) _board.getEntityAt(this._x, this._y);
+			if (tmp.getTopEntity() instanceof Portal)
+			{
+				_board.addEntity((int) (this._x + this._y*_board.getLevel().getWidth()), new LayeredEntity((int) this._x, (int) this._y, new Grass((int) this._x, (int) this._y, Sprite.grass), new Portal((int) this._x, (int) this._y, Sprite.portal, _board)));
+			}
+			else
+			{
+				_board.addEntity((int) (this._x + this._y*_board.getLevel().getWidth()), new Grass((int) this._x, (int) this._y, Sprite.grass));
+			}
+		}
 	}
 	
 
