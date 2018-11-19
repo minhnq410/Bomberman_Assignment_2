@@ -160,7 +160,7 @@ public class Bomb extends AnimatedEntitiy
 
 		return null;
 	}
-
+	
 	@Override
 	public boolean collide(Entity e)
 	{

@@ -90,7 +90,7 @@ public class Bomber extends Character
 	private void detectPlaceBomb()
 	{
 
-		if (_input.space && _timeBetweenPutBombs < -50 && Game.getBombRate() > 0)
+		if (_input.space && _timeBetweenPutBombs < -25 && Game.getBombRate() > 0)
 		{
 			this.placeBomb(this.getXTile(), this.getYTile());
 			Game.addBombRate(-1);
@@ -110,7 +110,7 @@ public class Bomber extends Character
 	protected void placeBomb(int x, int y)
 	{
 		_bombs.add(new Bomb(x, y, _board));
-		planted.play(0.125);
+		planted.play();
 	}
 
 	private void clearBombs()

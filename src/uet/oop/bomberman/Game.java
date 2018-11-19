@@ -60,7 +60,8 @@ public class Game extends Canvas implements MouseListener
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
-	private Music background = TinySound.loadMusic("sounds/background.wav");
+	protected Music game_background_sound = TinySound.loadMusic("sounds/background.wav");
+	protected Music menu_background_sound = TinySound.loadMusic("sounds/mainmenu.wav");
 	
 	public Game(Frame frame)
 	{
@@ -129,10 +130,13 @@ public class Game extends Canvas implements MouseListener
 
 	public void start()
 	{		
+		menu_background_sound.play(true);
 		while (_menu)
 			renderScreen();
 		
-		background.play(true, 0.5);
+		menu_background_sound.stop();
+		game_background_sound.play(true, 0.5);
+		
 		_board.loadLevel(1);
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();

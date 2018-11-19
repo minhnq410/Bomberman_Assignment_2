@@ -13,6 +13,9 @@ import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
 
 import java.awt.*;
+
+import kuusisto.tinysound.Sound;
+import kuusisto.tinysound.TinySound;
 import uet.oop.bomberman.entities.tile.Grass;
 
 public abstract class Enemy extends Character
@@ -30,6 +33,7 @@ public abstract class Enemy extends Character
 	protected int _finalAnimation = 30;
 	protected Sprite _deadSprite;
 
+	private Sound killed_sound = TinySound.loadSound("sounds/enemykilled.wav");
 	public Enemy(int x, int y, Board board, Sprite dead, double speed, int points)
 	{
 		super(x, y, board);
@@ -217,6 +221,7 @@ public abstract class Enemy extends Character
 			return;
 		_alive = false;
 
+		killed_sound.play();
 		_board.addPoints(_points);
 
 		Message msg = new Message("+" + _points, getXMessage(), getYMessage(), 2, Color.white, 14);

@@ -238,7 +238,10 @@ public class Flame extends Entity
 	{
 		//Kiểm tra va chạm của bom, lửa với các entity khác
 		if (this.getBounds().intersects(_board.getBomber().getBounds()))
-			this.collide(_board.getBomber());
+		{
+			_board.getBomber().collide(this);
+		}
+		
 		for (int i = 0; i < _flameSegments.length; i++)
 		{
 			if (_board.getBombAt(_flameSegments[i].getX(), _flameSegments[i].getY()) != null)
@@ -281,6 +284,21 @@ public class Flame extends Entity
 			else
 			{
 				_board.addEntity((int) (this._x + this._y*_board.getLevel().getWidth()), new Grass((int) this._x, (int) this._y, Sprite.grass));
+			}
+		}
+		
+		for (int i = 0; i < _board._entities.length; i++)
+		{
+			if (_board._entities[i] instanceof FlameSegment)
+			{
+				for (int j = 0; j < _board._characters.size(); j++)
+				{
+					if (_board._entities[i].getBounds().intersects(_board._characters.get(j).getBounds()))
+					{
+						_board._entities[i].collide(_board._characters.get(j));
+					}
+				}
+				_board.addEntity(i, new Grass((int)_board._entities[i].getX(), (int) _board._entities[i].getY(), Sprite.grass));
 			}
 		}
 	}
