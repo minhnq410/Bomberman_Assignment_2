@@ -180,7 +180,7 @@ public class Screen
 		
 		
 		Shape play = new Rectangle(Game.WIDTH + 10, Game.HEIGHT + 50, 195, 100);
-		
+		Shape highscore = new Rectangle(Game.WIDTH + 10, Game.HEIGHT + 300, 250, 70);
 		//Vẽ hình nền
 		g.drawImage(background, 0, 0, null);
 		
@@ -189,6 +189,12 @@ public class Screen
 		paint.draw(play);
 		paint.setColor(Color.GREEN);
 		paint.fill(play);
+		
+		//Vẽ nút điểm cao
+		paint.setColor(Color.BLACK);
+		paint.draw(highscore);
+		paint.setColor(Color.GREEN);
+		paint.fill(highscore);
 		
 		//Vẽ tên trò chơi
 		paint.setColor(new Color(239, 249, 39));
@@ -200,8 +206,43 @@ public class Screen
 		paint.setFont(new Font("Arial", Font.PLAIN, 20*Game.SCALE));
 		paint.drawString("PLAY", Game.WIDTH + 30, Game.HEIGHT + 120);
 		
+		//Vẽ chữ highscore
+		paint.setColor(Color.BLACK);
+		paint.setFont(new Font("Arial", Font.PLAIN, 15*Game.SCALE));
+		paint.drawString("Highscore", Game.WIDTH + 30, Game.HEIGHT + 350);
 	}
 
+	public void drawHighscore(Graphics g)
+	{
+		Graphics2D paint = (Graphics2D) g;
+		
+		BufferedImage background = null;
+		
+		try
+		{
+			background = ImageIO.read(new File("res/backgroundimage.png"));
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		g.drawImage(background, 0, 0, null);
+		
+		Shape back = new Rectangle(10, 10, 90, 45);
+		paint.setColor(Color.BLACK);
+		paint.draw(back);
+		paint.setColor(Color.GREEN);
+		paint.fill(back);
+		
+		
+		paint.setColor(Color.BLACK);
+		paint.setFont(new Font("Arial", Font.PLAIN, 10*Game.SCALE));
+		paint.drawString("Back", 20, 40);
+		drawCenteredString("High score: " + Game._highscore, getRealWidth(), getRealHeight(), g);
+		
+		
+		
+	}
+	
 	public int getWidth()
 	{
 		return _width;

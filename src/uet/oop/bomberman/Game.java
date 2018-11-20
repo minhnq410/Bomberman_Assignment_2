@@ -13,6 +13,12 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,6 +37,7 @@ public class Game extends Canvas implements MouseListener
 	public static final int TILES_SIZE = 16, WIDTH = TILES_SIZE * (31 / 2), HEIGHT = 13 * TILES_SIZE;
 
 	public static int SCALE = 3;
+	
 
 	public static final String TITLE = "BombermanGame";
 
@@ -46,7 +53,7 @@ public class Game extends Canvas implements MouseListener
 	protected static int bombRate = BOMBRATE;
 	protected static int bombRadius = BOMBRADIUS;
 	protected static double bomberSpeed = BOMBERSPEED;
-
+	
 	protected int _screenDelay = SCREENDELAY;
 
 	private Keyboard _input;
@@ -64,6 +71,8 @@ public class Game extends Canvas implements MouseListener
 	protected Music game_background_sound = TinySound.loadMusic("sounds/background.wav");
 	protected Music menu_background_sound = TinySound.loadMusic("sounds/mainmenu.wav");
 	protected Sound gameover_sound = TinySound.loadSound("sounds/gameover.wav");
+	
+	public static int _highscore = 0;
 	
 	public Game(Frame frame)
 	{
@@ -133,8 +142,11 @@ public class Game extends Canvas implements MouseListener
 	public void start()
 	{		
 		menu_background_sound.play(true);
+		readHighscore();
 		while (_menu)
+		{
 			renderScreen();
+		}
 		
 		menu_background_sound.stop();
 		game_background_sound.play(true, 0.5);
@@ -241,7 +253,26 @@ public class Game extends Canvas implements MouseListener
 	{
 		_paused = true;
 	}
-
+	
+	public void readHighscore()
+	{
+		BufferedReader read;
+		try
+		{
+			read = new BufferedReader(new FileReader(new File("res/highscore.txt")));
+			String score = read.readLine().trim();
+			if (score == null)
+				_highscore = 0;
+			else
+				_highscore = Integer.parseInt(score);
+			read.close();
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
@@ -258,6 +289,16 @@ public class Game extends Canvas implements MouseListener
 			gameover_sound.stop();
 			game_background_sound.play(true);
 			
+		}
+		Rectangle highscoreButton = new Rectangle(Game.WIDTH + 10, Game.HEIGHT + 300, 250, 70);
+		if (highscoreButton.contains(e.getX(), e.getY()) == true)
+		{
+			_board.setShow(5);
+		}
+		Rectangle backButton = new Rectangle(10, 10, 90, 45);
+		if (backButton.contains(e.getX(),  e.getY()) == true)
+		{
+			_board.setShow(4);
 		}
 	}
 

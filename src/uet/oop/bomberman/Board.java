@@ -16,6 +16,12 @@ import uet.oop.bomberman.level.LevelLoader;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,11 +46,12 @@ public class Board implements IRender
 	protected List<Bomb> _bombs = new ArrayList<>();
 	private List<Message> _messages = new ArrayList<>();
 
-	private int _screenToShow = -1; // 1:endgame, 2:changelevel, 3:paused, 4:menu
+	private int _screenToShow = -1; // 1:endgame, 2:changelevel, 3:paused, 4:menu, 5:highscore
 
 	private int _time = Game.TIME;
 	private int _points = Game.POINTS;
 	
+	public static int _highscore = 0;
 	protected Sound gameover_sound = TinySound.loadSound("sounds/gameover.wav");
 	
 	public Board(Game game, Keyboard input, Screen screen)
@@ -143,6 +150,22 @@ public class Board implements IRender
 		_screenToShow = 1;
 		_game.resetScreenDelay();
 		_game.pause();
+		
+		BufferedWriter write;
+		try
+		{
+			write = new BufferedWriter(new FileWriter(new File("res/highscore.txt")));
+			if (Game._highscore < this._points)
+				write.write(String.valueOf(this._points));
+			else
+				write.write(String.valueOf(Game._highscore));
+			
+			write.close();
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public boolean detectNoEnemies()
@@ -172,6 +195,9 @@ public class Board implements IRender
 				break;
 			case 4:
 				_screen.drawMenu(g);
+				break;
+			case 5:
+				_screen.drawHighscore(g);
 				break;
 		}
 	}
