@@ -45,7 +45,7 @@ public class Board implements IRender
 	private int _time = Game.TIME;
 	private int _points = Game.POINTS;
 	
-	private Sound gameover_sound = TinySound.loadSound("sounds/gameover.wav");
+	protected Sound gameover_sound = TinySound.loadSound("sounds/gameover.wav");
 	
 	public Board(Game game, Keyboard input, Screen screen)
 	{
@@ -139,11 +139,10 @@ public class Board implements IRender
 	public void endGame()
 	{
 		_game.game_background_sound.stop();
-		gameover_sound.play(0.5);
+		_game.gameover_sound.play(0.5);
 		_screenToShow = 1;
 		_game.resetScreenDelay();
 		_game.pause();
-		
 	}
 
 	public boolean detectNoEnemies()
@@ -379,7 +378,7 @@ public class Board implements IRender
 	protected void resetBomberStats()
 	{
 		Game.bomberSpeed = 1.0;
-		Game.bombRate = 2;
+		Game.bombRate = 1;
 		Game.bombRadius = 1;
 	}
 
@@ -439,5 +438,4 @@ public class Board implements IRender
 	{
 		return _levelLoader.getHeight();
 	}
-
 }

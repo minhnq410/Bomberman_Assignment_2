@@ -123,6 +123,16 @@ public class Screen
 		g.setColor(Color.yellow);
 		drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE,
 				g);
+		
+		Shape replay = new Rectangle(getRealWidth()/2 - 50, getRealHeight()/2 + 100, 105, 30);
+		Graphics2D pen = (Graphics2D) g;
+		pen.setColor(Color.RED);
+		pen.draw(replay);
+		pen.setColor(Color.GREEN);
+		pen.fill(replay);
+		pen.setColor(Color.WHITE);
+		pen.setFont(new Font("Arial", Font.PLAIN, 10 * Game.SCALE));
+		pen.drawString("RETRY", getRealWidth()/2 - 50, getRealHeight()/2 + 125);
 	}
 
 	public void drawChangeLevel(Graphics g, int level)

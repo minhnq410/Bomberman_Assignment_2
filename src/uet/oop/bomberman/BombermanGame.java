@@ -10,5 +10,6 @@ public class BombermanGame
 	{
 		TinySound.init();
 		new Frame();
+		TinySound.shutdown();
 	}
 }

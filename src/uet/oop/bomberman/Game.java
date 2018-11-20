@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import kuusisto.tinysound.Music;
+import kuusisto.tinysound.Sound;
 import kuusisto.tinysound.TinySound;
 
 /**
@@ -62,6 +63,7 @@ public class Game extends Canvas implements MouseListener
 	
 	protected Music game_background_sound = TinySound.loadMusic("sounds/background.wav");
 	protected Music menu_background_sound = TinySound.loadMusic("sounds/mainmenu.wav");
+	protected Sound gameover_sound = TinySound.loadSound("sounds/gameover.wav");
 	
 	public Game(Frame frame)
 	{
@@ -248,9 +250,15 @@ public class Game extends Canvas implements MouseListener
 		{
 			_menu = false;
 			_running = true;
+		}
+		Rectangle replayButton = new Rectangle(310, 412, 105, 30);
+		if (replayButton.contains(e.getX(), e.getY()) == true)
+		{
+			_board.loadLevel(1);
+			gameover_sound.stop();
+			game_background_sound.play(true);
 			
 		}
-		// TODO: Giải quyết nullpointerexception khi click vào play
 	}
 
 	@Override

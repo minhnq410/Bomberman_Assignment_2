@@ -54,7 +54,10 @@ public class Bomb extends AnimatedEntitiy
 		else
 		{
 			if (!_exploded)
+			{
 				explode();
+				exploded.play(0.125);
+			}
 			else
 			{
 				updateFlames();
@@ -141,7 +144,6 @@ public class Bomb extends AnimatedEntitiy
 		_flames[2] = new Flame((int) this.getX(), (int) this.getY(), 2, downRadius, _board);
 		_flames[3] = new Flame((int) this.getX(), (int) this.getY(), 3, leftRadius, _board);
 		
-		exploded.play(0.125);
 	}
 
 	public FlameSegment flameAt(int x, int y)
