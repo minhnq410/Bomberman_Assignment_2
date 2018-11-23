@@ -276,7 +276,7 @@ public class Game extends Canvas implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		Rectangle playButton = new Rectangle(Game.WIDTH, Game.HEIGHT + 50, 200, 100);
+		Rectangle playButton = new Rectangle(Game.WIDTH - 110, Game.HEIGHT + 50, 200, 100);
 		if (playButton.contains(e.getX(), e.getY()) == true)
 		{
 			_menu = false;
@@ -290,7 +290,7 @@ public class Game extends Canvas implements MouseListener
 			game_background_sound.play(true);
 			
 		}
-		Rectangle highscoreButton = new Rectangle(Game.WIDTH + 10, Game.HEIGHT + 300, 250, 70);
+		Rectangle highscoreButton = new Rectangle(Game.WIDTH + 100, Game.HEIGHT + 50, 250, 70);
 		if (highscoreButton.contains(e.getX(), e.getY()) == true)
 		{
 			_board.setShow(5);

@@ -179,8 +179,8 @@ public class Screen
 		}
 		
 		
-		Shape play = new Rectangle(Game.WIDTH + 10, Game.HEIGHT + 50, 195, 100);
-		Shape highscore = new Rectangle(Game.WIDTH + 10, Game.HEIGHT + 300, 250, 70);
+		Shape play = new Rectangle(Game.WIDTH - 100, Game.HEIGHT + 50, 195, 100);
+		Shape highscore = new Rectangle(Game.WIDTH + 100, Game.HEIGHT + 50, 250, 70);
 		//Vẽ hình nền
 		g.drawImage(background, 0, 0, null);
 		
@@ -204,12 +204,12 @@ public class Screen
 		//Vẽ chữ play
 		paint.setColor(Color.BLACK);
 		paint.setFont(new Font("Arial", Font.PLAIN, 20*Game.SCALE));
-		paint.drawString("PLAY", Game.WIDTH + 30, Game.HEIGHT + 120);
+		paint.drawString("PLAY", Game.WIDTH - 80, Game.HEIGHT + 120);
 		
 		//Vẽ chữ highscore
 		paint.setColor(Color.BLACK);
 		paint.setFont(new Font("Arial", Font.PLAIN, 15*Game.SCALE));
-		paint.drawString("Highscore", Game.WIDTH + 30, Game.HEIGHT + 350);
+		paint.drawString("Highscore", Game.WIDTH + 120, Game.HEIGHT + 100);
 	}
 
 	public void drawHighscore(Graphics g)

@@ -10,6 +10,7 @@ import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Wall;
+import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
@@ -113,25 +114,61 @@ public class Bomb extends AnimatedEntitiy
 		int leftRadius = 0, rightRadius = 0, upRadius = 0, downRadius = 0;
 		for (int i = (int) this.getX() + 1; i <= (int) this.getX() + Game.getBombRadius(); i++)
 		{
-			if (!(_board.getEntityAt(i, this.getY()) instanceof Wall))
+			if (_board.getEntityAt(i, this.getY()) instanceof LayeredEntity)
+			{
+				LayeredEntity tmp = (LayeredEntity) _board.getEntityAt(i, this.getY());
+				if (tmp.getTopEntity() instanceof Brick)
+				{
+					rightRadius++;
+					break;
+				}
+			}
+			else if (!(_board.getEntityAt(i, this.getY()) instanceof Wall) )
 				rightRadius++;
 			else break;
 		}
 		for (int i = (int) this.getX() - 1; i >= (int) this.getX() - Game.getBombRadius(); i--)
 		{
-			if (!(_board.getEntityAt(i, this.getY()) instanceof Wall))
+			if (_board.getEntityAt(i, this.getY()) instanceof LayeredEntity)
+			{
+				LayeredEntity tmp = (LayeredEntity) _board.getEntityAt(i, this.getY());
+				if (tmp.getTopEntity() instanceof Brick)
+				{
+					leftRadius++;
+					break;
+				}
+			}
+			else if (!(_board.getEntityAt(i, this.getY()) instanceof Wall))
 				leftRadius++;
 			else break;
 		}
 		for (int i = (int) this.getY() + 1; i <= (int) this.getY() + Game.getBombRadius(); i++)
 		{
-			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
+			if (_board.getEntityAt(this.getX(), i) instanceof LayeredEntity)
+			{
+				LayeredEntity tmp = (LayeredEntity) _board.getEntityAt(this.getX(), i);
+				if (tmp.getTopEntity() instanceof Brick)
+				{
+					downRadius++;
+					break;
+				}
+			}
+			else if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				downRadius++;
 			else break;
 		}
 		for (int i = (int) this.getY() - 1; i >= (int) this.getY() - Game.getBombRadius(); i--)
 		{
-			if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
+			if (_board.getEntityAt(this.getX(), i) instanceof LayeredEntity)
+			{
+				LayeredEntity tmp = (LayeredEntity) _board.getEntityAt(this.getX(), i);
+				if (tmp.getTopEntity() instanceof Brick)
+				{
+					upRadius++;
+					break;
+				}
+			}
+			else if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				upRadius++;
 			else break;
 		}
