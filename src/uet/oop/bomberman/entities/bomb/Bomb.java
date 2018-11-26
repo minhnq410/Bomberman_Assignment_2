@@ -122,6 +122,11 @@ public class Bomb extends AnimatedEntitiy
 					rightRadius++;
 					break;
 				}
+				else if (tmp.getBelowTopEntity() instanceof Bomb)
+				{
+					rightRadius++;
+					break;
+				}
 			}
 			else if (!(_board.getEntityAt(i, this.getY()) instanceof Wall) )
 				rightRadius++;
@@ -133,6 +138,11 @@ public class Bomb extends AnimatedEntitiy
 			{
 				LayeredEntity tmp = (LayeredEntity) _board.getEntityAt(i, this.getY());
 				if (tmp.getTopEntity() instanceof Brick)
+				{
+					leftRadius++;
+					break;
+				}
+				else if (tmp.getBelowTopEntity() instanceof Bomb)
 				{
 					leftRadius++;
 					break;
@@ -152,6 +162,11 @@ public class Bomb extends AnimatedEntitiy
 					downRadius++;
 					break;
 				}
+				else if (tmp.getBelowTopEntity() instanceof Bomb)
+				{
+					downRadius++;
+					break;
+				}
 			}
 			else if (!(_board.getEntityAt(this.getX(), i) instanceof Wall))
 				downRadius++;
@@ -163,6 +178,11 @@ public class Bomb extends AnimatedEntitiy
 			{
 				LayeredEntity tmp = (LayeredEntity) _board.getEntityAt(this.getX(), i);
 				if (tmp.getTopEntity() instanceof Brick)
+				{
+					upRadius++;
+					break;
+				}
+				else if (tmp.getBelowTopEntity() instanceof Bomb)
 				{
 					upRadius++;
 					break;
