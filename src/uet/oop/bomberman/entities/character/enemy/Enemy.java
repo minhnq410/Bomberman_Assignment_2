@@ -99,7 +99,6 @@ public abstract class Enemy extends Character
 		// toán hay không
 		// TODO: sử dụng move() để di chuyển
 		// TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển
-		int xa = 0, ya = 0;
 		if (_steps <= 0)
 		{
 			_direction = _ai.calculateDirection();
@@ -108,9 +107,8 @@ public abstract class Enemy extends Character
 
 		if (_direction == 0)
 		{
-			ya++;
-			if (canMove(this._x + this.getSprite().SIZE / 2, this._y + this.getSprite().SIZE * 3 / 4 + 1)
-					&& canMove(this._x, this._y + this.getSprite().SIZE * 3 / 4))
+			if (canMove(this._x + this.getSprite().SIZE / 2, this._y + this.getSprite().SIZE + 1)
+					&& canMove(this._x, this._y + this.getSprite().SIZE + 1))
 			{
 				_steps--;
 				move(0, _speed);
@@ -125,9 +123,8 @@ public abstract class Enemy extends Character
 		}
 		if (_direction == 1)
 		{
-			xa++;
-			if (canMove(this._x + this.getSprite().SIZE / 2 + 1, this._y + this.getSprite().SIZE / 2 + 1)
-					&& canMove(this._x + this.getSprite().SIZE / 2 + 1, this._y))
+			if (canMove(this._x + this.getSprite().SIZE + 1, this._y + this.getSprite().SIZE - 1)
+					&& canMove(this._x + this.getSprite().SIZE + 1, this._y + 1))
 			{
 				_steps--;
 				move(_speed, 0);
@@ -142,9 +139,8 @@ public abstract class Enemy extends Character
 		}
 		if (_direction == 2)
 		{
-			xa--;
-			if (canMove(this._x - this.getSprite().SIZE / 2 - 1, this._y + this.getSprite().SIZE / 2 + 1)
-					&& canMove(this._x - this.getSprite().SIZE / 2 - 1, this._y))
+			if (canMove(this._x - 1, this._y + this.getSprite().SIZE - 1)
+					&& canMove(this._x - 1, this._y + 1))
 			{
 				_steps--;
 				move(-_speed, 0);
@@ -159,9 +155,8 @@ public abstract class Enemy extends Character
 		}
 		if (_direction == 3)
 		{
-			ya--;
-			if (canMove(this._x + this.getSprite().SIZE / 2, this._y - this.getSprite().SIZE / 4 - 1)
-					&& canMove(this._x, this._y - this.getSprite().SIZE / 4))
+			if (canMove(this._x + this.getSprite().SIZE * 3 / 4 - 2, this._y - 1)
+					&& canMove(this._x, this._y - 1))
 			{
 				_steps--;
 				move(0, -_speed);
@@ -189,15 +184,10 @@ public abstract class Enemy extends Character
 	@Override
 	public boolean canMove(double x, double y)
 	{
-		// TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di
-		// chuyển tới đó hay không
 		return !(_board
-				.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE / 4),
-						Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE / 4))
-				.collide(this)
-				&& !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE / 4),
-						Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE / 4)) instanceof Grass));
-
+				.getEntityAt(Coordinates.pixelToTile(x),
+                                             Coordinates.pixelToTile(y - Game.TILES_SIZE))
+				.collide(this));
 	}
 	@Override
 	public boolean collide(Entity e)

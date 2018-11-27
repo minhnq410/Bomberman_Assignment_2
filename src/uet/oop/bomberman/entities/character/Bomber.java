@@ -168,8 +168,8 @@ public class Bomber extends Character
 	{
 		if (_input.up)
 		{
-			if (canMove(this._x + this.getSprite().SIZE / 4, this._y - this.getSprite().SIZE / 4)
-					&& canMove(this._x, this._y - this.getSprite().SIZE / 4))
+			if (canMove(this._x + this.getSprite().SIZE * 3 / 4 - 2, this._y)
+					&& canMove(this._x, this._y))
 			{
 				move(0, Game.getBomberSpeed());
 				_moving = true;
@@ -178,8 +178,8 @@ public class Bomber extends Character
 		}
 		else if (_input.down)
 		{
-			if (canMove(this._x + this.getSprite().SIZE / 4, this._y + this.getSprite().SIZE * 3 / 4)
-					&& canMove(this._x, this._y + this.getSprite().SIZE * 3 / 4))
+			if (canMove(this._x + this.getSprite().SIZE * 3 / 4 - 2, this._y + this.getSprite().SIZE)
+					&& canMove(this._x, this._y + this.getSprite().SIZE))
 			{
 				move(0, Game.getBomberSpeed());
 				_moving = true;
@@ -187,8 +187,8 @@ public class Bomber extends Character
 		}
 		else if (_input.left)
 		{
-			if (canMove(this._x - this.getSprite().SIZE / 4 - 1, this._y + this.getSprite().SIZE / 2 + 1)
-					&& canMove(this._x - this.getSprite().SIZE / 4 - 1, this._y))
+			if (canMove(this._x - 1, this._y + this.getSprite().SIZE - 2)
+					&& canMove(this._x - 1, this._y + 2))
 			{
 				move(Game.getBomberSpeed(), 0);
 				_moving = true;
@@ -196,8 +196,8 @@ public class Bomber extends Character
 		}
 		else if (_input.right)
 		{
-			if (canMove(this._x + this.getSprite().SIZE / 4 + 1, this._y + this.getSprite().SIZE / 2 + 1)
-					&& canMove(this._x + this.getSprite().SIZE / 4 + 1, this._y))
+			if (canMove(this._x + this.getSprite().SIZE * 3 / 4, this._y + this.getSprite().SIZE - 2)
+					&& canMove(this._x + this.getSprite().SIZE * 3 / 4, this._y + 2))
 			{
 				move(Game.getBomberSpeed(), 0);
 				_moving = true;
@@ -213,11 +213,9 @@ public class Bomber extends Character
 	public boolean canMove(double x, double y)
 	{
 		return !(_board
-				.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE / 4),
-						Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE / 4))
-				.collide(this)
-				&& !(_board.getEntityAt(Coordinates.pixelToTile(x + this.getSprite().SIZE / 4),
-						Coordinates.pixelToTile(y - Game.TILES_SIZE + this.getSprite().SIZE / 4)) instanceof Grass));
+				.getEntityAt(Coordinates.pixelToTile(x),
+                                             Coordinates.pixelToTile(y - Game.TILES_SIZE))
+				.collide(this));
 	}
 
 	@Override

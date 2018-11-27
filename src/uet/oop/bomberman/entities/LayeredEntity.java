@@ -93,7 +93,7 @@ public class LayeredEntity extends Entity
 		{
 			return topMost.collide(e);
 		}
-		else if (topMost instanceof Grass)
+		else if (this.getBelowTopEntity() instanceof Bomb)
 		{
 			return this.getBelowTopEntity().collide(e);
 		}

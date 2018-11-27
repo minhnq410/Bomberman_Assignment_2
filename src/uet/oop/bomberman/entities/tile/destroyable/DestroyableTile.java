@@ -57,7 +57,7 @@ public class DestroyableTile extends Tile
 		}
 		if (!(e instanceof Grass))
 		{
-			return this.getBounds().intersects(e.getBounds());
+			return true;
 		}
                 
 		return false;
