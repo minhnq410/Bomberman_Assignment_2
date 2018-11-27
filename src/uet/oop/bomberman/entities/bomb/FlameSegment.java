@@ -83,7 +83,7 @@ public class FlameSegment extends Entity
 	@Override
 	public void update()
 	{
-
+		
 	}
 
 	@Override

@@ -286,7 +286,6 @@ public class Flame extends Entity
 				_board.addEntity((int) (this._x + this._y*_board.getLevel().getWidth()), new Grass((int) this._x, (int) this._y, Sprite.grass));
 			}
 		}
-		
 		for (int i = 0; i < _board._entities.length; i++)
 		{
 			if (_board._entities[i] instanceof FlameSegment)
