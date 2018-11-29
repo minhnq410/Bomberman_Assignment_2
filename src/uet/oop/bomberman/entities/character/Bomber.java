@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import kuusisto.tinysound.Sound;
 import kuusisto.tinysound.TinySound;
+import uet.oop.bomberman.entities.bomb.Flame;
 
 public class Bomber extends Character
 {
@@ -249,9 +250,7 @@ public class Bomber extends Character
 	@Override
 	public boolean collide(Entity e)
 	{
-
 		return e.collide(this);
-
 		// TODO: xử lý va chạm với Flame
 		// TODO: xử lý va chạm với Enemy
 

@@ -107,8 +107,8 @@ public abstract class Enemy extends Character
 
 		if (_direction == 0)
 		{
-			if (canMove(this._x + this.getSprite().SIZE / 2, this._y + this.getSprite().SIZE + 1)
-					&& canMove(this._x, this._y + this.getSprite().SIZE + 1))
+			if (canMove(this._x + this.getSprite().SIZE / 2, this._y + this.getSprite().SIZE)
+					&& canMove(this._x, this._y + this.getSprite().SIZE))
 			{
 				_steps--;
 				move(0, _speed);
@@ -139,8 +139,8 @@ public abstract class Enemy extends Character
 		}
 		if (_direction == 2)
 		{
-			if (canMove(this._x - 1, this._y + this.getSprite().SIZE - 1)
-					&& canMove(this._x - 1, this._y + 1))
+			if (canMove(this._x - 2, this._y + this.getSprite().SIZE - 1)
+					&& canMove(this._x - 2, this._y + 1))
 			{
 				_steps--;
 				move(-_speed, 0);

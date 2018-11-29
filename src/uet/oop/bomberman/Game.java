@@ -286,6 +286,7 @@ public class Game extends Canvas implements MouseListener
 		if (replayButton.contains(e.getX(), e.getY()) == true)
 		{
 			_board.loadLevel(1);
+                        _board.resetPoints();
 			gameover_sound.stop();
 			game_background_sound.play(true);
 			

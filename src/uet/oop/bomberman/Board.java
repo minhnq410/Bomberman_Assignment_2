@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 
 import kuusisto.tinysound.Sound;
 import kuusisto.tinysound.TinySound;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
 
 /**
  * Quản lý thao tác điều khiển, load level, render các màn hình của game
@@ -281,7 +282,7 @@ public class Board implements IRender
 
 		return null;
 	}
-
+        
 	public FlameSegment getFlameSegmentAt(int x, int y)
 	{
 		Iterator<Bomb> bs = _bombs.iterator();
@@ -449,6 +450,11 @@ public class Board implements IRender
 	{
 		return _points;
 	}
+        
+        public void resetPoints()
+        {
+            _points = 0;
+        }
 
 	public void addPoints(int points)
 	{

@@ -8,6 +8,8 @@ import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
+import uet.oop.bomberman.entities.character.enemy.Ghost;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Portal;
 import uet.oop.bomberman.entities.tile.Wall;
@@ -205,7 +207,7 @@ public class Bomb extends AnimatedEntitiy
 			else break;
 		}
 		// TODO: xử lý khi Character đứng tại vị trí Bomb
-
+                
 		// TODO: tạo các Flame
 		_flames = new Flame[4];
 		_flames[0] = new Flame((int) this.getX(), (int) this.getY(), 0, upRadius, _board);
@@ -240,7 +242,12 @@ public class Bomb extends AnimatedEntitiy
 			this.explode();
 			return true;
 		}
-		else if (!this._allowedToPassThru)
+                else if (e instanceof Enemy)
+                {
+                    if (e instanceof Ghost) return false;
+                    else return true;
+                }
+		else if (!this._allowedToPassThru && e instanceof Bomber)
 			return true;
 		return false;
 	}
